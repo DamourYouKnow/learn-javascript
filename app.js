@@ -65,7 +65,11 @@ var output = {
                 editor.remove('.script-area');
 
                 let content = editors[i].getSession().getValue();
-                content = content.replaceAll("console.log", "output.log")
+                content = content.replaceAll("console.log", "output.log");
+
+                let handleErr = `$('.output-area').eq(${i})`
+                        + `.val(err.message);`;
+                content = `try { ${content} } catch(err) { ${handleErr} }`; 
 
                 let scriptArea = $('<script>').addClass('script-area');
                 scriptArea.html(content);
