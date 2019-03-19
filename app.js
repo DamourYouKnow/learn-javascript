@@ -9,15 +9,30 @@
                 highlight();
 
                 // Initialize code editors.
-                for (let elem of document.getElementsByClassName('editor')) {
-                    let editor = ace.edit(elem);
-                    editor.setTheme("ace/theme/github");
-                    editor.session.setMode("ace/mode/javascript");
-                    editors.push(editor);
-                }
+                $('.editor').each(function() { initEditor($(this)); });
             });
         });
     }); 
+
+    function initEditor(elem) {
+        //elem.addClass('container-fluid');
+
+        let editorPane = $('<div>').addClass('editor-pane');
+        
+        let editor = ace.edit(editorPane[0]);
+        editor.setTheme("ace/theme/github");
+        editor.session.setMode("ace/mode/javascript");
+        editors.push(editor);
+
+        let runBtn = $('<button>').text("Run!");
+        let outputArea = $('<textarea>')
+                .addClass('output-area')/*.prop('readonly')*/;
+
+        elem.append(editorPane);
+        elem.append(runBtn);
+        elem.append(outputArea);
+
+    }
 
     function highlight() {
         $('pre code').each(function(i, block) {
