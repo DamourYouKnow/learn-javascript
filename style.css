@@ -6,7 +6,9 @@
 
 .output-area {
     width: 100%;
-    height: 100%;
+    height: 175px;
+    resize: none;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .no-padding {
