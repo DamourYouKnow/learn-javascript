@@ -21,7 +21,7 @@ var output = {
         $(window).on('hashchange', resolveLesson);
 
         $('.lesson-link').click(function() {
-            loadLesson($(this).attr('path') + "lesson.md");
+            loadLesson($(this).attr('path'));
         });
     }); 
 
@@ -30,28 +30,28 @@ var output = {
         if (target) {
             $('.lesson-link').each(function() {
                 if ($(this).attr('href') === target) {
-                    loadLesson($(this).attr('path') + "lesson.md");
+                    loadLesson($(this).attr('path'));
                 }
             });
         } else {
             let firstLesson = $('.lesson-link').eq(0);
-            loadLesson(firstLesson.attr('path') + "lesson.md");
+            loadLesson(firstLesson.attr('path'));
             document.location.hash = firstLesson.attr('href');
         }
     }
 
     function loadLesson(path) {
-        loadFile(path, function(content) {
+        loadFile(path + "lesson.md", function(content) {
             $('#lesson').html(marked(content));           
             highlight();
 
             // Initialize code editors.
             editors = [];
-            $('.editor').each(function() { initEditor($(this)); });
+            $('.editor').each(function() { initEditor($(this), path); });
         });
     }
 
-    function initEditor(elem) {
+    function initEditor(elem, path) {
         //elem.addClass('container-fluid');
 
         let editorPane = $('<div>').addClass('editor-pane');
@@ -60,6 +60,12 @@ var output = {
         editor.setTheme("ace/theme/github");
         editor.session.setMode("ace/mode/javascript");
         editors.push(editor);
+
+        if (elem.attr('source')) {
+            loadFile(path + elem.attr('source'), function(content) {
+                editor.setValue(content, 1);
+            });
+        }
 
         let runBtn = $('<button>')
                 .addClass('run-btn')
