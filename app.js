@@ -17,17 +17,29 @@ var output = {
     var editors = [];
 
     $(document).ready(function() {
-        $('.lesson-link').click(function() {
-            let lessonPath = $(this).attr('path') + "lesson.md";
-            loadFile(lessonPath, function(content) {
-                $('#lesson').html(marked(content));           
-                highlight();
-
-                // Initialize code editors.
-                $('.editor').each(function() { initEditor($(this)); });
+        let target = window.location.hash;
+        if (target) {
+            $('.lesson-link').each(function() {
+                if ($(this).attr('href') === target) {
+                    loadLesson($(this).parent('li').attr('path') + "lesson.md");
+                }
             });
+        }
+
+        $('.lesson-item').click(function() {
+            loadLesson($(this).attr('path') + "lesson.md");
         });
     }); 
+
+    function loadLesson(path) {
+        loadFile(path, function(content) {
+            $('#lesson').html(marked(content));           
+            highlight();
+
+            // Initialize code editors.
+            $('.editor').each(function() { initEditor($(this)); });
+        });
+    }
 
     function initEditor(elem) {
         //elem.addClass('container-fluid');
