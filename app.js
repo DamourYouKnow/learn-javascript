@@ -17,6 +17,15 @@ var output = {
     var editors = [];
 
     $(document).ready(function() {
+        resolveLesson();
+        $(window).on('hashchange', resolveLesson);
+
+        $('.lesson-link').click(function() {
+            loadLesson($(this).attr('path') + "lesson.md");
+        });
+    }); 
+
+    function resolveLesson() {
         let target = window.location.hash;
         if (target) {
             $('.lesson-link').each(function() {
@@ -24,12 +33,12 @@ var output = {
                     loadLesson($(this).attr('path') + "lesson.md");
                 }
             });
+        } else {
+            let firstLesson = $('.lesson-link').eq(0);
+            loadLesson(firstLesson.attr('path') + "lesson.md");
+            document.location.hash = firstLesson.attr('href');
         }
-
-        $('.lesson-link').click(function() {
-            loadLesson($(this).attr('path') + "lesson.md");
-        });
-    }); 
+    }
 
     function loadLesson(path) {
         loadFile(path, function(content) {
