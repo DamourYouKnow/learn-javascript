@@ -21,12 +21,12 @@ var output = {
         if (target) {
             $('.lesson-link').each(function() {
                 if ($(this).attr('href') === target) {
-                    loadLesson($(this).parent('li').attr('path') + "lesson.md");
+                    loadLesson($(this).attr('path') + "lesson.md");
                 }
             });
         }
 
-        $('.lesson-item').click(function() {
+        $('.lesson-link').click(function() {
             loadLesson($(this).attr('path') + "lesson.md");
         });
     }); 
@@ -37,6 +37,7 @@ var output = {
             highlight();
 
             // Initialize code editors.
+            editors = [];
             $('.editor').each(function() { initEditor($(this)); });
         });
     }
@@ -74,7 +75,7 @@ var output = {
                 output.index = i;
 
                 $('.output-area').eq(i).val("Your output will show up here...");
-                editor.remove('.script-area');
+                editor.find('.script-area').remove();
 
                 let content = editors[i].getSession().getValue();
                 content = content.replaceAll("console.log", "output.log");

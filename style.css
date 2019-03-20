@@ -15,3 +15,11 @@
     padding-right: 0px;
     padding-left: 0px;
 }
+
+.sidebar {
+    border-right: 1px solid #D3D3D3;
+}
+
+.lesson-container {
+    margin-left: 0px;
+}

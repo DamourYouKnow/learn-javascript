@@ -11,14 +11,28 @@
 </head>
 
 <body>
-    <ol>
-        <li class="lesson-item" path="./lesson1-test/"><a href="#lesson1" class="lesson-link">Lesson 1: Test Lesson</a></li>
-        <li class="lesson-item" path="./lesson2-test2/"><a href="#lesson2" class="lesson-link">Lesson 2: Another Test!</a></li>
-    </ol>
+    <div class="container-fluid">
+        <br/>
+        <div class="row">
+            <div class="col-md-2 sidebar">
+                Lessons
+                <ul>
+                    <li>
+                        <a href="#lesson1" class="lesson-link" path="./lesson1-test/">Lesson 1: Test Lesson</a>
+                    </li>
+                    <li>
+                        <a href="#lesson2" class="lesson-link" path="./lesson2-test2/">Lesson 2: Another Test!</a>
+                    </li>
+                </ul>
+            </div>
 
-    <div class="container">
-        <div id="lesson">
-            <!-- Content loaded here during runtime. -->
+            <div class="col-md-10">
+                <div class="container lesson-container">
+                    <div id="lesson">
+                        <!-- Content loaded here during runtime. -->
+                    </div>
+                </div>         
+            </div>
         </div>
     </div>
 
