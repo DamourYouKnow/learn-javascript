@@ -1,0 +1,49 @@
+{
+  "name": "typescript-sample-project",
+  "version": "0.0.0",
+  "description": "TypeScript sample project",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx ./node_modules/ts-node/dist/bin.js ./src/server/server.ts",
+    "clean": "rm rf public/scripts/*",
+    "lint": "./node_modules/.bin/eslint . --ext .js,.ts,.tsx",
+    "lint-fix": "./node_modules/.bin/eslint . --fix --ext .js,.ts,.tsx",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx rollup -c",
+    "build-prod": "npx rollup -c --prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DamourYouKnow/typescript-sample-project.git"
+  },
+  "author": "DamourYouKnow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DamourYouKnow/typescript-sample-project/issues"
+  },
+  "homepage": "https://github.com/DamourYouKnow/typescript-sample-project#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/express": "^4.17.1",
+    "@types/node": "^12.7.2",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "eslint": "^6.2.1",
+    "rollup": "^1.20.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript2": "^0.23.0",
+    "rollup-plugin-uglify": "^6.0.2",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
