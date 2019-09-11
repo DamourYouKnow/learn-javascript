@@ -2,6 +2,9 @@ import highlight from 'highlightjs';
 import marked from 'marked';
 import ace from 'ace-builds';
 
+import Request from './request';
+import Utils from './utils';
+
 type Editor = ace.Ace.Editor;
 
 let editors: Editor[] = [];
@@ -61,7 +64,7 @@ function resolveLesson(): void {
 
 function loadLesson(path: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-        getFile(`${path}lesson.md`).then((content) => {
+        Request.getFile(`${path}lesson.md`).then((content) => {
             const lessonContainer = document.getElementById('lesson');
             if (lessonContainer) {
                 lessonContainer.innerHTML = marked(content);
@@ -90,7 +93,7 @@ async function initEditor(elem: HTMLDivElement, path: string): Promise<void> {
     // Load default source code.
     const source = elem.getAttribute('source'); 
     if (source) {
-        const content = await getFile(`${path}${source}`);
+        const content = await Request.getFile(`${path}${source}`);
         editor.setValue(content, 1);
     }
 
@@ -125,7 +128,7 @@ function runCode(evn: Event): void {
             }
 
             let content = editors[index].getSession().getValue();
-            content = replace(content, 'console.log', 'output.log');
+            content = Utils.replace(content, 'console.log', 'output.log');
         
             // TODO...
         }
@@ -138,23 +141,3 @@ function highlightCode(): void {
     }
 }
 
-function getFile(path: string): Promise<string> {
-    return new Promise<string>((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', path);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    resolve(xhr.responseText);
-                } else {
-                    reject(Error(xhr.statusText));
-                }
-            }
-        };
-        xhr.send();
-    });
-}
-
-function replace(target: string, findStr: string, replaceStr: string): string {
-    return target.split(findStr).join(replaceStr);
-}
