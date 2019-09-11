@@ -12,7 +12,7 @@ export default class Editor {
         editorPane.classList.add('editor-pane');
         
         ace.config.set('basePath', '/ace');
-        this._editor = ace.edit(elem);
+        this._editor = ace.edit(editorPane);
         this._editor.setTheme('ace/theme/github');
         this._editor.session.setMode('ace/mode/javascript');
         if (content) {
@@ -23,7 +23,7 @@ export default class Editor {
         const runBtn = document.createElement('button') as HTMLButtonElement;
         runBtn.classList.add('run-btn');
         runBtn.textContent = 'Run!';
-        runBtn.onclick = this.execute;
+        runBtn.onclick = this.execute.bind(this);
 
         const out = document.createElement('textarea') as HTMLTextAreaElement;
         out.classList.add('output-area');
