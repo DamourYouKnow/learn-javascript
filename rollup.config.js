@@ -12,7 +12,6 @@ export default function(config) {
 
     return {
         input: './src/client/app.ts',
-        external: [],
         plugins: [
             resolve({extensions}),
             typescript({
