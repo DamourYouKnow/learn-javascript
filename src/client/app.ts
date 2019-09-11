@@ -1,11 +1,8 @@
 import highlight from 'highlightjs';
 import marked from 'marked';
-import ace from 'ace-builds';
 
+import Editor from './editor';
 import Request from './request';
-import Utils from './utils';
-
-type Editor = ace.Ace.Editor;
 
 let editors: Editor[] = [];
 
@@ -17,28 +14,30 @@ const output = {
             area.textContent = `${area.textContent}\n${x.valueOf()}`;
         }
     }
-}
+};
 
-document.addEventListener('DOMContentLoaded', function(){
-    resolveLesson();
+document.addEventListener('DOMContentLoaded', async function() {
+    await resolveLesson();
     window.onhashchange = resolveLesson;
 
     document.querySelectorAll('.lesson-link').forEach((elem) => {
-        (elem as HTMLAnchorElement).onclick = function(evn) {
+        (elem as HTMLAnchorElement).onclick = async function(evn) {
             if (evn.target instanceof Element) {
                 const path = evn.target.getAttribute('path');
                 if (path) {
-                    loadLesson(path).catch((err) => {
+                    try {
+                        await loadLesson(path);
+                    } catch (err) {
                         console.error(err);
                         alert(err);
-                    });
+                    }
                 }
             }
-        }
+        };
     });
 });
 
-function resolveLesson(): void {
+async function resolveLesson(): Promise<void> {
     const target = window.location.hash;
     const links = Array.from(document.querySelectorAll('.lesson-link'));
 
@@ -47,91 +46,43 @@ function resolveLesson(): void {
             const link = elem as HTMLAnchorElement;
             if (link.href === target) {
                 const path = link.getAttribute('path');
-                // FIXME: Error handling!
-                if (path) loadLesson(path);
+                if (path) await loadLesson(path);
             }
         }
     } else {
         const firstLesson = links[0] as HTMLAnchorElement;
-        // FIXME: Error handling!
         const path = firstLesson.getAttribute('path');
         if (path) {
-            loadLesson(path);
             document.location.hash = firstLesson.getAttribute('href') || '';
+            await loadLesson(path);
         }
     }
 }
 
-function loadLesson(path: string): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-        Request.getFile(`${path}lesson.md`).then((content) => {
-            const lessonContainer = document.getElementById('lesson');
-            if (lessonContainer) {
-                lessonContainer.innerHTML = marked(content);
-                highlightCode();
-                editors = [];
-    
-                const elems = Array.from(document.querySelectorAll('.editor'));
-                const promises = elems.map((elem) => {
-                    return initEditor(elem as HTMLDivElement, path)
-                });
-                Promise.all(promises).then(() => resolve()).catch(reject);
-            }
-        }).catch(reject);
-    });
-}
+async function loadLesson(path: string): Promise<void> {
+    const content = await Request.getFile(`${path}lesson.md`);
 
-async function initEditor(elem: HTMLDivElement, path: string): Promise<void> {
-    const editorPane = document.createElement('div') as HTMLDivElement;
-    editorPane.classList.add('editor-pane');
+    const lessonContainer = document.getElementById('lesson');
+    if (lessonContainer) {
+        lessonContainer.innerHTML = marked(content);
+        highlightCode();
+        editors = [];
 
-    const editor = ace.edit(editorPane);
-    editor.setTheme('ace/theme/github');
-    editor.session.setMode('ace/mode/javascript');
-    editors.push(editor);
+        const elems = Array.from(document.querySelectorAll('.editor'));
+        const contents = await Promise.all(elems.map((elem) => {
+            return new Promise<string>((resolve, reject) => {
+                const source = elem.getAttribute('source');
+                if (source) {
+                    Request.getFile(path + source).then(resolve).catch(reject);
+                } else {
+                    resolve('');
+                }
+            });
+        }));
 
-    // Load default source code.
-    const source = elem.getAttribute('source'); 
-    if (source) {
-        const content = await Request.getFile(`${path}${source}`);
-        editor.setValue(content, 1);
-    }
-
-    // Add run button.
-    const runBtn = document.createElement('button') as HTMLButtonElement;
-    runBtn.classList.add('run-btn');
-    runBtn.textContent = 'Run!';
-    runBtn.onclick = runCode;
-
-    // Add output area.
-    const outArea = document.createElement('textarea') as HTMLTextAreaElement;
-    outArea.classList.add('output-area');
-    outArea.setAttribute('readonly', 'true');
-    outArea.textContent = 'Your output will show up here...'
-
-    elem.appendChild(editorPane);
-    elem.appendChild(runBtn);
-    elem.appendChild(outArea);
-}
-
-function runCode(evn: Event): void {
-    if (evn.target instanceof Element) {
-        const editor = evn.target.parentElement as HTMLDivElement;
-
-        const editorElems = Array.from(document.querySelectorAll('.editor'));
-        const index = editorElems.findIndex((elem) => elem.isSameNode(editor));
-        if (index >= 0) {
-            output.index = index;
-            const outArea = editor.querySelector('.output-area');
-            if (outArea) {
-                outArea.textContent = 'Your output will show up here...';
-            }
-
-            let content = editors[index].getSession().getValue();
-            content = Utils.replace(content, 'console.log', 'output.log');
-        
-            // TODO...
-        }
+        editors = elems.map((elem, i) => {
+            return new Editor(elem as HTMLElement, contents[i]);
+        });
     }
 }
 
