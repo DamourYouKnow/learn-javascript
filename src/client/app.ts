@@ -8,7 +8,7 @@ let editors: Editor[] = [];
 
 const output = {
     index: 0,
-    log: function(x: any) {
+    log: function(x: any): void {
         const area = document.querySelector('.output-area');
         if (area) {
             area.textContent = `${area.textContent}\n${x.valueOf()}`;
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 });
 
-function resolveLesson() {
+function resolveLesson(): void {
     const target = window.location.hash;
     const links = Array.from(document.querySelectorAll('.lesson-link'));
 
@@ -60,7 +60,7 @@ function resolveLesson() {
 }
 
 function loadLesson(path: string): Promise<void> {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
         getFile(`${path}lesson.md`).then((content) => {
             const lessonContainer = document.getElementById('lesson');
             if (lessonContainer) {
@@ -78,7 +78,7 @@ function loadLesson(path: string): Promise<void> {
     });
 }
 
-async function initEditor(elem: HTMLDivElement, path: string) {
+async function initEditor(elem: HTMLDivElement, path: string): Promise<void> {
     const editorPane = document.createElement('div') as HTMLDivElement;
     editorPane.classList.add('editor-pane');
 
@@ -111,7 +111,7 @@ async function initEditor(elem: HTMLDivElement, path: string) {
     elem.appendChild(outArea);
 }
 
-function runCode(evn: Event) {
+function runCode(evn: Event): void {
     if (evn.target instanceof Element) {
         const editor = evn.target.parentElement as HTMLDivElement;
 
@@ -132,14 +132,14 @@ function runCode(evn: Event) {
     }
 }
 
-function highlightCode() {
+function highlightCode(): void {
     for (const codeblock of document.querySelectorAll('pre code')) {
         highlight.highlightBlock(codeblock);
     }
 }
 
 function getFile(path: string): Promise<string> {
-    return new Promise((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', path);
         xhr.onreadystatechange = function() {
