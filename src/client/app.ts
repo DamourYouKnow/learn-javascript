@@ -87,8 +87,8 @@ async function loadLesson(path: string): Promise<void> {
 }
 
 function highlightCode(): void {
-    for (const codeblock of document.querySelectorAll('pre code')) {
-        highlight.highlightBlock(codeblock);
-    }
+    document.querySelectorAll('pre code').forEach((elem) => {
+        highlight.highlightBlock(elem);
+    });
 }
 

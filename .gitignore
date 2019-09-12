@@ -1,3 +1,4 @@
 public/scripts/
 node_modules/
 .rpt2_cache/
+.vscode/settings.json

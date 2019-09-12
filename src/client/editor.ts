@@ -2,6 +2,7 @@ import ace from 'ace-builds';
 
 import Utils from './utils';
 
+
 let running: HTMLTextAreaElement | null = null;
 
 (console as any).userlog = function(item: any) {
@@ -14,9 +15,11 @@ export default class Editor {
     private _editor: ace.Ace.Editor;
     private _elem: HTMLElement;
     private _default = '';
+    private _running: boolean;
 
     public constructor(elem: HTMLElement, content?: string) {
         this._elem = elem;
+        this._running = false;
 
         const editorPane = document.createElement('div') as HTMLDivElement;
         editorPane.classList.add('editor-pane');
@@ -54,6 +57,8 @@ export default class Editor {
     }
 
     public execute(): void {
+        if (this._running) return;
+
         const code = Utils.replace(
             this._editor.getSession().getValue(),
             'console.log',
@@ -64,11 +69,25 @@ export default class Editor {
         if (area) {
             area.textContent = 'Your output will show up here...';
             running = area as HTMLTextAreaElement;
-            try {
-                eval(code);
-            } catch (err) {
-                area.textContent = `${area.textContent}\n${err.message}`;
-            }
+
+            this._running = true;
+
+
+            const worker = new Worker('../workers/code-worker.js');
+            worker.addEventListener('message', (message: any) => {
+                this._running = false;
+                if (!message.data) {
+                    const err = message.data;
+                    area.textContent = `${area.textContent}\n${err.message}`;
+                }
+            });
+
+            setTimeout(() => {
+                worker.terminate();
+                this._running = false;
+            }, 3000);     
+
+            worker.postMessage(code);
         }
     }
 }
