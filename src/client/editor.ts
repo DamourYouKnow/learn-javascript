@@ -64,7 +64,11 @@ export default class Editor {
         if (area) {
             area.textContent = 'Your output will show up here...';
             running = area as HTMLTextAreaElement;
-            eval(code);
+            try {
+                eval(code);
+            } catch (err) {
+                area.textContent = `${area.textContent}\n${err.message}`;
+            }
         }
     }
 }
