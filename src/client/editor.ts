@@ -21,7 +21,7 @@ export default class Editor {
         const editorPane = document.createElement('div') as HTMLDivElement;
         editorPane.classList.add('editor-pane');
         
-        ace.config.set('basePath', '/ace');
+        ace.config.set('basePath', './ace');
         this._editor = ace.edit(editorPane);
         this._editor.setTheme('ace/theme/github');
         this._editor.session.setMode('ace/mode/javascript');

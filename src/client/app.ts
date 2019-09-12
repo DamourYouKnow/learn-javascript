@@ -44,7 +44,7 @@ async function resolveLesson(): Promise<void> {
     if (target) {
         for (const elem of links) {
             const link = elem as HTMLAnchorElement;
-            if (link.href === target) {
+            if (`#${link.href.split('#')[1]}` === target) {
                 const path = link.getAttribute('path');
                 if (path) await loadLesson(path);
             }
