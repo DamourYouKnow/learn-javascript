@@ -1,7 +1,5 @@
 # Learn Javascript
 
-View the project here: https://damouryouknow.github.io/learn-javascript/
-
 The goal of this project is to provide a template for providing tutorials 
 designed to help teach learning developers.
 
