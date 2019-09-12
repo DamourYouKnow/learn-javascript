@@ -1,5 +1,15 @@
 import ace from 'ace-builds';
 
+import Utils from './utils';
+
+let running: HTMLTextAreaElement | null = null;
+
+(console as any).userlog = function(item: any) {
+    if (running) {
+        running.textContent = `${running.textContent}\n${item.valueOf()}`;
+    }
+};
+
 export default class Editor {
     private _editor: ace.Ace.Editor;
     private _elem: HTMLElement;
@@ -43,7 +53,18 @@ export default class Editor {
         return this._default;
     }
 
-    public execute() {
-        const code = this._editor.getSession().getValue();
+    public execute(): void {
+        const code = Utils.replace(
+            this._editor.getSession().getValue(),
+            'console.log',
+            'console.userlog'
+        );
+
+        const area = this._elem.querySelector('.output-area');
+        if (area) {
+            area.textContent = 'Your output will show up here...';
+            running = area as HTMLTextAreaElement;
+            eval(code);
+        }
     }
 }
