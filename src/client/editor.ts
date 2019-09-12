@@ -2,15 +2,6 @@ import ace from 'ace-builds';
 
 import Utils from './utils';
 
-
-let running: HTMLTextAreaElement | null = null;
-
-(console as any).userlog = function(item: any) {
-    if (running) {
-        running.textContent = `${running.textContent}\n${item.valueOf()}`;
-    }
-};
-
 export default class Editor {
     private _editor: ace.Ace.Editor;
     private _elem: HTMLElement;
@@ -62,13 +53,12 @@ export default class Editor {
         const code = Utils.replace(
             this._editor.getSession().getValue(),
             'console.log',
-            'console.userlog'
+            'userconsolelog'
         );
 
         const area = this._elem.querySelector('.output-area');
         if (area) {
             area.textContent = 'Your output will show up here...';
-            running = area as HTMLTextAreaElement;
 
             this._running = true;
 
@@ -76,16 +66,19 @@ export default class Editor {
             const worker = new Worker('../workers/code-worker.js');
             worker.addEventListener('message', (message: any) => {
                 this._running = false;
-                if (!message.data) {
-                    const err = message.data;
-                    area.textContent = `${area.textContent}\n${err.message}`;
+                const result = message.data;
+                if (result.success) {
+                    area.textContent += `\n${result.output}`;
+                } else {
+                    area.textContent += `\n${result.output}`
                 }
             });
 
             setTimeout(() => {
                 worker.terminate();
                 this._running = false;
-            }, 3000);     
+                area.textContent += `\nCode execution timed out.`
+            }, 2000);     
 
             worker.postMessage(code);
         }
