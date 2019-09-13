@@ -63,7 +63,7 @@ export default class Editor {
             this._running = true;
 
 
-            const worker = new Worker('../workers/code-worker.js');
+            const worker = new Worker('././workers/code-worker.js');
 
             const timer = setTimeout(() => {
                 worker.terminate();
