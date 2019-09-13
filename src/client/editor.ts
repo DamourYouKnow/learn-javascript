@@ -64,8 +64,16 @@ export default class Editor {
 
 
             const worker = new Worker('../workers/code-worker.js');
+
+            const timer = setTimeout(() => {
+                worker.terminate();
+                this._running = false;
+                area.textContent += `\nCode execution timed out.`
+            }, 2000);
+
             worker.addEventListener('message', (message: any) => {
                 this._running = false;
+                clearTimeout(timer);
                 const result = message.data;
                 if (result.success) {
                     area.textContent += `\n${result.output}`;
@@ -73,12 +81,6 @@ export default class Editor {
                     area.textContent += `\n${result.output}`
                 }
             });
-
-            setTimeout(() => {
-                worker.terminate();
-                this._running = false;
-                area.textContent += `\nCode execution timed out.`
-            }, 2000);     
 
             worker.postMessage(code);
         }
