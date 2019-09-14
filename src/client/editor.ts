@@ -68,7 +68,7 @@ export default class Editor {
             const timer = setTimeout(() => {
                 worker.terminate();
                 this._running = false;
-                area.textContent += `\nCode execution timed out.`
+                area.textContent += `\nCode execution timed out.`;
             }, 2000);
 
             worker.addEventListener('message', (message: any) => {
@@ -78,7 +78,7 @@ export default class Editor {
                 if (result.success) {
                     area.textContent += `\n${result.output}`;
                 } else {
-                    area.textContent += `\n${result.output}`
+                    area.textContent += `\n${result.output}`;
                 }
             });
 
