@@ -1,6 +1,5 @@
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
-import babel from 'rollup-plugin-babel';
 import typescript from 'rollup-plugin-typescript2';
 import {uglify} from 'rollup-plugin-uglify';
 
@@ -23,10 +22,6 @@ export default function(config) {
                 }
             }),
             commonjs(),
-            babel({
-                extensions: extensions,
-                include: ['src/client/*'],            
-            }),
             ...(prod ? [uglify()] : [])
         ],
         output: {
