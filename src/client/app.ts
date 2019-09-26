@@ -59,6 +59,12 @@ async function resolveLesson(): Promise<void> {
     }
 }
 
+// TODO: Duplicate interface declaration
+interface EditorConfig {
+    content?: string;
+    tests?: string;
+}
+
 async function loadLesson(path: string): Promise<void> {
     const content = await Request.getFile(`${path}lesson.md`);
 
@@ -69,20 +75,17 @@ async function loadLesson(path: string): Promise<void> {
         editors = [];
 
         const elems = Array.from(document.querySelectorAll('.editor'));
-        const contents = await Promise.all(elems.map((elem) => {
-            return new Promise<string>((resolve, reject) => {
-                const source = elem.getAttribute('source');
-                if (source) {
-                    Request.getFile(path + source).then(resolve).catch(reject);
-                } else {
-                    resolve('');
-                }
-            });
-        }));
 
-        editors = elems.map((elem, i) => {
-            return new Editor(elem as HTMLElement, contents[i]);
-        });
+        for (const elem of elems) {
+            const source = elem.getAttribute('source');
+            const tests = elem.getAttribute('tests');
+
+            const config: EditorConfig = {};
+            if (source) config.content = await Request.getFile(path + source);
+            if (tests) config.tests = await Request.getFile(path + tests);
+            
+            editors.push(new Editor(elem as HTMLElement, config));
+        }
     }
 }
 

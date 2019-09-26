@@ -2,13 +2,19 @@ import ace from 'ace-builds';
 
 import Utils from './utils';
 
+interface EditorConfig {
+    content?: string;
+    tests?: string;
+}
+
 export default class Editor {
     private _editor: ace.Ace.Editor;
     private _elem: HTMLElement;
     private _default = '';
+    private _tests?: string;
     private _running: boolean;
 
-    public constructor(elem: HTMLElement, content?: string) {
+    public constructor(elem: HTMLElement, config?: EditorConfig) {
         this._elem = elem;
         this._running = false;
 
@@ -19,9 +25,10 @@ export default class Editor {
         this._editor = ace.edit(editorPane);
         this._editor.setTheme('ace/theme/github');
         this._editor.session.setMode('ace/mode/javascript');
-        if (content) {
-            this._default = content;
-            this._editor.setValue(content, 1);
+        if (config) {
+            this._default = config.content || '';
+            this._editor.setValue(this._default, 1);
+            this._tests = config.tests;
         }
 
         const runBtn = document.createElement('button') as HTMLButtonElement;
@@ -45,6 +52,10 @@ export default class Editor {
 
     public get default(): string {
         return this._default;
+    }
+
+    public set tests(value: string) {
+        this._tests = value;
     }
 
     public execute(): void {
@@ -82,7 +93,7 @@ export default class Editor {
                 }
             });
 
-            worker.postMessage(code);
+            worker.postMessage({'code':  code, 'tests': this._tests});
         }
     }
 }

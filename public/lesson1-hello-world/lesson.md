@@ -11,3 +11,14 @@ double quotes (`""`) or single quotes (`''`).
 The following code will output the string `"Hello, world!"`. Try it!
 
 <div class="editor" source="hello_world.js"></div>
+
+## Exercise
+
+Througout the different lessons, you will also be presented with different 
+exercises. We will evaluate your code against different criteria and give 
+you immediate feedback.
+
+This first exercise is simple. Change the **string** on the first line to 
+`'I am a programming wizard!'`
+
+<div class="editor" source="exercise.js" tests="tests.js"></div>

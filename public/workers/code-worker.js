@@ -1,8 +1,13 @@
 let __output = [];
 
 addEventListener('message', (message) => {
-    console.log(message.data);
-    const code = message.data;
+    const data = message.data;
+    let code = data.code;
+    if (data.tests) {
+        code += `\n${data.tests}`;
+    }
+    console.log(code);
+
     try {
         eval(code);
         console.log(__output);
@@ -16,4 +21,34 @@ addEventListener('message', (message) => {
 
 function userconsolelog(item) {
     __output.push(item.valueOf());
+}
+
+const assert = {};
+
+assert.equals = function(a, b, message) {
+    if (a !== b) {
+        throw Error(message);
+    }
+    console.log('equals');
+};
+
+assert.ok = function(a, message) {
+    if (!a) {
+        throw Error(message);
+    }
+};
+
+function describe(item, fn) {
+    __output = [`${item}:`];
+    fn();
+}
+
+function it(description, fn) {
+    try {
+        fn();
+        __output.push(`✓ ${description}`);
+    } catch (err) {
+        __output.push(`✗ ${description}`);
+        __output.push(`${err.message}`);
+    }
 }
