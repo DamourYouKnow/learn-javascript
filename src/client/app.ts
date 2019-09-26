@@ -20,7 +20,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     await resolveLesson();
     window.onhashchange = resolveLesson;
 
-    document.querySelectorAll('.lesson-link').forEach((elem) => {
+    const linkUl = document.getElementById('lesson-links') as HTMLUListElement;
+    if (!linkUl) throw Error('Lesson link list not found');
+
+    linkUl.querySelectorAll('a').forEach((elem) => {
         (elem as HTMLAnchorElement).onclick = async function(evn) {
             if (evn.target instanceof Element) {
                 const path = evn.target.getAttribute('path');
@@ -39,7 +42,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 async function resolveLesson(): Promise<void> {
     const target = window.location.hash;
-    const links = Array.from(document.querySelectorAll('.lesson-link'));
+
+    const linkUl = document.getElementById('lesson-links') as HTMLUListElement;
+    if (!linkUl) throw Error('Lesson link list not found');
+
+    const links = Array.from(linkUl.querySelectorAll('a'));
 
     if (target) {
         for (const elem of links) {
