@@ -46,15 +46,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .output-pass {
-    background-color: rgb(234, 252, 223)
+    background-color: rgb(237, 247, 231)
 }
 
 .output-fail {
-    background-color: #fcd3d2;
+    background-color: #faecec;
 }
 
 .output-error {
-    background-color: #fcd3d2;
+    background-color: #faecec;
 }
 
 .indicator {
