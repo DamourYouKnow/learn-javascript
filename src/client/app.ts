@@ -6,16 +6,6 @@ import Request from './request';
 
 let editors: Editor[] = [];
 
-const output = {
-    index: 0,
-    log: function(x: any): void {
-        const area = document.querySelector('.output-area');
-        if (area) {
-            area.textContent = `${area.textContent}\n${x.valueOf()}`;
-        }
-    }
-};
-
 document.addEventListener('DOMContentLoaded', async function() {
     await resolveLesson();
     window.onhashchange = resolveLesson;
