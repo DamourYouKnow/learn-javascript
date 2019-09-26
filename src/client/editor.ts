@@ -32,7 +32,7 @@ export default class Editor {
         ace.config.set('basePath', './ace');
         this._editor = ace.edit(editorPane);
         this._editor.setFontSize('14px');
-        this._editor.setTheme('ace/theme/github');
+        this._editor.setTheme('ace/theme/xcode');
         this._editor.session.setMode('ace/mode/javascript');
         if (config) {
             this._default = config.content || '';
