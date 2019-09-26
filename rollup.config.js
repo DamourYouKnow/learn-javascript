@@ -17,7 +17,7 @@ export default function(config) {
                 tsconfigOverride: {
                     compilerOptions: {
                         sourceMap: prod ? false : true,
-                        module: 'es6'
+                        module: 'es2015'
                     }
                 }
             }),
