@@ -19,9 +19,3 @@ this later.
 
 For more information on data types, check out 
 [Mozilla's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
-
-```js
-for (let x = 0; x < 10; x++) {
-    console.log(x);
-}
-```
