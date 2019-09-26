@@ -30,9 +30,7 @@ h1, h2, h3, h4, h5, h6 {
     resize: none;
     font-family: 'Courier New', Courier, monospace;
     overflow-y: scroll;
-    border-color: #D3D3D3;
-    border-width: 1px;
-    border-style: solid;
+    border: 1px solid #D3D3D3;
 }
 
 .output-line {
@@ -73,6 +71,17 @@ h1, h2, h3, h4, h5, h6 {
 .no-padding {
     padding-right: 0px;
     padding-left: 0px;
+}
+
+.note {
+    margin-bottom: 15px;
+    border: 1px solid #D3D3D3;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 15px;
+    background-color: rgb(253, 242, 229);
 }
 
 .sidebar {
