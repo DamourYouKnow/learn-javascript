@@ -11,16 +11,19 @@ addEventListener('message', (message) => {
     try {
         eval(code);
         console.log(__output);
-        postMessage({'success': true, 'output': __output.join('\n')});
+        postMessage({'success': true, 'output': __output});
     } catch (err) {
-        postMessage({'success': false, 'output': err.message});
+        postMessage({
+            'success': false, 
+            'output': [{'type': 'error', 'content': err.message}]
+        });
     } finally {
         __output = [];
     }
 });
 
 function userconsolelog(item) {
-    __output.push(item.valueOf());
+    __output.push({'type': 'default', 'content': item.valueOf()});
 }
 
 const assert = {};
@@ -39,16 +42,16 @@ assert.ok = function(a, message) {
 };
 
 function describe(item, fn) {
-    __output = [`${item}:`];
+    __output.push({'type': 'label', 'content': item});
     fn();
 }
 
 function it(description, fn) {
     try {
         fn();
-        __output.push(`✓ ${description}`);
+        __output.push({'type': 'pass', 'content': description});
     } catch (err) {
-        __output.push(`✗ ${description}`);
-        __output.push(`${err.message}`);
+        __output.push({'type': 'fail', 'content': description});
+        __output.push({'type': 'error', 'content': err.message});
     }
 }

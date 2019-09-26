@@ -9,6 +9,41 @@
     height: 175px;
     resize: none;
     font-family: 'Courier New', Courier, monospace;
+    overflow-y: scroll;
+    border-color: #D3D3D3;
+    border-width: 1px;
+    border-style: solid;
+    padding: 6px;
+}
+
+.output-line {
+    display: block;
+}
+
+.output-label {
+    font-weight: bold;
+}
+
+.output-pass {
+    background-color: rgb(234, 252, 223)
+}
+
+.output-fail {
+    background-color: #fcd3d2;
+}
+
+.indicator {
+    padding-left: 3px;
+    margin-right: 6px;
+    font-size: 18px;
+}
+
+.pass-indicator {
+    color: green;
+}
+
+.fail-indicator {
+    color: red;
 }
 
 .no-padding {

@@ -7,6 +7,14 @@ interface EditorConfig {
     tests?: string;
 }
 
+interface Output {
+    type: OutputType;
+    content: string;
+}
+
+type OutputType = 'default' | 'label' | 'pass' | 'fail' | 'error';
+type Renderer = (line: HTMLElement) => HTMLElement;
+
 export default class Editor {
     private _editor: ace.Ace.Editor;
     private _elem: HTMLElement;
@@ -36,9 +44,8 @@ export default class Editor {
         runBtn.textContent = 'Run!';
         runBtn.onclick = this.execute.bind(this);
 
-        const out = document.createElement('textarea') as HTMLTextAreaElement;
+        const out = document.createElement('div') as HTMLDivElement;
         out.classList.add('output-area');
-        out.setAttribute('readonly', 'true');
         out.textContent = 'Your output will show up here...';
 
         elem.appendChild(editorPane);
@@ -87,13 +94,61 @@ export default class Editor {
                 clearTimeout(timer);
                 const result = message.data;
                 if (result.success) {
-                    area.textContent += `\n${result.output}`;
+                    this.output(result.output);
                 } else {
-                    area.textContent += `\n${result.output}`;
+                    this.output(result.output);
                 }
             });
 
             worker.postMessage({'code':  code, 'tests': this._tests});
         }
     }
+
+    private static readonly render: {[key in OutputType]: Renderer} = {
+        'default': (line) => {
+            line.classList.add('output-default');
+            return line;
+        },
+        'error': (line) => {
+            line.classList.add('output-error');
+            return line;
+        },
+        'pass': (line) => {
+            line.classList.add('output-pass');
+            const check = document.createElement('span') as HTMLSpanElement;
+            check.classList.add('indicator', 'pass-indicator');
+            check.textContent = '✓';
+            line.insertBefore(check, line.firstChild);
+            return line;
+        },
+        'fail': (line) => {
+            line.classList.add('output-fail');
+            const check = document.createElement('span') as HTMLSpanElement;
+            check.classList.add('indicator', 'fail-indicator');
+            check.textContent = '✗';
+            line.insertBefore(check, line.firstChild);
+            return line;
+        },
+        'label': (line) => {
+            line.classList.add('output-label');
+            return line;
+        }
+    };
+
+    private static outputLine(line: string): HTMLSpanElement {
+        const elem = document.createElement('span') as HTMLSpanElement;
+        elem.classList.add('output-line');
+        elem.textContent = line;
+        return elem;
+    }
+
+    private output(lines: Output[]) {
+        const area = this._elem.querySelector('.output-area');
+        if (!area) throw Error('Editor output not found');
+
+        for (const line of lines) {
+            area.appendChild(
+                Editor.render[line.type](Editor.outputLine(line.content)));
+        }
+    } 
 }
