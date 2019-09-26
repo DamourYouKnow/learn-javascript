@@ -3,6 +3,7 @@ import marked from 'marked';
 
 import Editor from './editor';
 import Request from './request';
+import UI from './ui';
 
 let editors: Editor[] = [];
 
@@ -78,6 +79,39 @@ async function loadLesson(path: string): Promise<void> {
         }
 
         // Add previous next button.
+        // TODO: Refactor
+        const btnRow = document.createElement('div') as HTMLDivElement;
+        btnRow.classList.add('row');
+        const colLeft = document.createElement('div') as HTMLDivElement;
+        colLeft.classList.add('col-lg-6');
+        colLeft.style.textAlign = 'left';
+        const colRight = document.createElement('div') as HTMLDivElement;
+        colRight.classList.add('col-lg-6');
+        colRight.style.textAlign = 'right';
+
+        const links = lessonLinks();
+        const curLink = links.find((elem: HTMLAnchorElement) => {
+            return elem.getAttribute('path') === path;
+        });
+        if (curLink) {
+            const index = links.indexOf(curLink);
+            if (index >= 1) {
+                const prev = links[index - 1];
+                const prevBtn = UI.buttonLink(
+                    `Previous: ${prev.textContent}`, prev.href);
+                colLeft.appendChild(prevBtn);
+            }
+            if (index < links.length - 1) {
+                const next = links[index + 1];
+                const nextBtn = UI.buttonLink(
+                    `Next: ${next.textContent}`, next.href);
+                colRight.appendChild(nextBtn);
+            }
+        }
+
+        btnRow.appendChild(colLeft);
+        btnRow.appendChild(colRight);
+        lessonContainer.appendChild(btnRow);
     }
 }
 
