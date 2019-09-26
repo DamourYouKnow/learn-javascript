@@ -10,10 +10,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     await resolveLesson();
     window.onhashchange = resolveLesson;
 
-    const linkUl = document.getElementById('lesson-links') as HTMLUListElement;
-    if (!linkUl) throw Error('Lesson link list not found');
-
-    linkUl.querySelectorAll('a').forEach((elem) => {
+    lessonLinks().forEach((elem) => {
         (elem as HTMLAnchorElement).onclick = async function(evn) {
             if (evn.target instanceof Element) {
                 const path = evn.target.getAttribute('path');
@@ -32,11 +29,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 async function resolveLesson(): Promise<void> {
     const target = window.location.hash;
-
-    const linkUl = document.getElementById('lesson-links') as HTMLUListElement;
-    if (!linkUl) throw Error('Lesson link list not found');
-
-    const links = Array.from(linkUl.querySelectorAll('a'));
+    const links = lessonLinks();
 
     if (target) {
         for (const elem of links) {
@@ -83,6 +76,8 @@ async function loadLesson(path: string): Promise<void> {
             
             editors.push(new Editor(elem as HTMLElement, config));
         }
+
+        // Add previous next button.
     }
 }
 
@@ -90,5 +85,11 @@ function highlightCode(): void {
     document.querySelectorAll('pre code').forEach((elem) => {
         highlight.highlightBlock(elem);
     });
+}
+
+function lessonLinks(): HTMLAnchorElement[] {
+    const linkUl = document.getElementById('lesson-links') as HTMLUListElement;
+    if (!linkUl) throw Error('Lesson link list not found');
+    return Array.from(linkUl.querySelectorAll('a'));
 }
 
