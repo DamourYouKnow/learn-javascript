@@ -78,7 +78,6 @@ export default class Editor {
         const area = this._elem.querySelector('.output-area');
         if (area) {
             area.textContent = '';
-            area.classList.remove('hidden');
 
             this._running = true;
 
@@ -88,11 +87,16 @@ export default class Editor {
             const timer = setTimeout(() => {
                 worker.terminate();
                 this._running = false;
-                area.textContent += `\nCode execution timed out.`;
+                area.classList.remove('hidden');
+                this.output([{
+                    'type': 'error',
+                    'content': 'Code execution took too long'
+                }]);
             }, 2000);
 
             worker.addEventListener('message', (message: any) => {
                 this._running = false;
+                area.classList.remove('hidden');
                 clearTimeout(timer);
                 const result = message.data;
                 if (result.success) {

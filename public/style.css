@@ -37,8 +37,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .output-line {
     display: block;
-    padding-left: 6px;
-    padding-right: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .output-label {
