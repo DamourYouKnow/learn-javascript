@@ -52,6 +52,8 @@ function it(description, fn) {
         __output.push({'type': 'pass', 'content': description});
     } catch (err) {
         __output.push({'type': 'fail', 'content': description});
-        __output.push({'type': 'error', 'content': err.message});
+        if (err.message) {
+            __output.push({'type': 'error', 'content': err.message});
+        }
     }
 }

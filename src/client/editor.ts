@@ -31,6 +31,7 @@ export default class Editor {
         
         ace.config.set('basePath', './ace');
         this._editor = ace.edit(editorPane);
+        this._editor.setFontSize('14px');
         this._editor.setTheme('ace/theme/github');
         this._editor.session.setMode('ace/mode/javascript');
         if (config) {
@@ -45,12 +46,12 @@ export default class Editor {
         runBtn.onclick = this.execute.bind(this);
 
         const out = document.createElement('div') as HTMLDivElement;
-        out.classList.add('output-area');
-        out.textContent = 'Your output will show up here...';
+        out.classList.add('output-area', 'hidden');
 
         elem.appendChild(editorPane);
         elem.appendChild(runBtn);
         elem.appendChild(out);
+        elem.appendChild(document.createElement('br'));
     }
 
     public get elem(): HTMLElement {
@@ -76,7 +77,8 @@ export default class Editor {
 
         const area = this._elem.querySelector('.output-area');
         if (area) {
-            area.textContent = 'Your output will show up here...';
+            area.textContent = '';
+            area.classList.remove('hidden');
 
             this._running = true;
 
@@ -111,6 +113,9 @@ export default class Editor {
         },
         'error': (line) => {
             line.classList.add('output-error');
+            const error = document.createElement('strong') as HTMLElement;
+            error.textContent = 'Error: ';
+            line.insertBefore(error, line.firstChild);
             return line;
         },
         'pass': (line) => {
