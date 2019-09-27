@@ -83,6 +83,9 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 15px;
     background-color: rgb(253, 242, 229);
 }
+.note p:last-child {
+    margin-bottom: 0;
+}
 
 .sidebar {
     border-right: 1px solid #D3D3D3;

@@ -25,9 +25,11 @@ Whether you use `let` or `const` should depend on if you want to be able to
 modify the value of the variable after it is declared. 
 
 <div class="note">
-    <strong>Note:</strong> The keyword <code>var</code> for declaring variables 
-    also exists in the language specification, however, the usage of this 
-    keyword is no longer recommended.
+
+**Note**: The keyword `var` for declaring variables 
+also exists in the language specification, however, the usage of this 
+keyword is no longer recommended.
+
 </div>
 
 The following code declares a variable named `myNumber` in the first line, 
