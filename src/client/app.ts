@@ -25,6 +25,17 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 async function resolveLesson(): Promise<void> {
     const target = window.location.hash;
+    const welcome = document.getElementById('welcome');
+    if (!welcome) throw Error('Welcome section not found');
+    if (!target) {
+        welcome.classList.toggle('hidden', false);
+        const lesson = document.getElementById('lesson');
+        if (lesson) lesson.innerHTML = '';
+        return;
+    } else {
+        welcome.classList.toggle('hidden', true); 
+    }
+
     const links = lessonLinks();
     const clicked = links.find((link) => {
         return `#${link.href.split('#')[1]}` === target;
