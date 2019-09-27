@@ -8,20 +8,15 @@ import UI from './ui';
 let editors: Editor[] = [];
 
 document.addEventListener('DOMContentLoaded', async function() {
-    await resolveLesson();
+    resolveLesson();
     window.onhashchange = resolveLesson;
 
     lessonLinks().forEach((elem) => {
-        (elem as HTMLAnchorElement).onclick = async function(evn) {
+        elem.onclick = async function(evn) {
             if (evn.target instanceof Element) {
-                const path = evn.target.getAttribute('path');
-                if (path) {
-                    try {
-                        await loadLesson(path);
-                    } catch (err) {
-                        console.error(err);
-                        alert(err);
-                    }
+                const href = evn.target.getAttribute('href');
+                if (href) {
+                    window.location.hash = href;
                 }
             }
         };
@@ -31,22 +26,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 async function resolveLesson(): Promise<void> {
     const target = window.location.hash;
     const links = lessonLinks();
-
-    if (target) {
-        for (const elem of links) {
-            const link = elem as HTMLAnchorElement;
-            if (`#${link.href.split('#')[1]}` === target) {
-                const path = link.getAttribute('path');
-                if (path) await loadLesson(path);
-            }
-        }
-    } else {
-        const firstLesson = links[0] as HTMLAnchorElement;
-        const path = firstLesson.getAttribute('path');
-        if (path) {
-            document.location.hash = firstLesson.getAttribute('href') || '';
-            await loadLesson(path);
-        }
+    const clicked = links.find((link) => {
+        return `#${link.href.split('#')[1]}` === target;
+    });
+    if (clicked) {
+        const path = clicked.getAttribute('path');
+        if (path) await loadLesson(path);
     }
 }
 
@@ -80,12 +65,12 @@ async function loadLesson(path: string): Promise<void> {
 
         // Add previous next button.
         // TODO: Refactor
-        const btnRow = document.createElement('div') as HTMLDivElement;
+        const btnRow = document.createElement('div');
         btnRow.classList.add('row');
-        const colLeft = document.createElement('div') as HTMLDivElement;
+        const colLeft = document.createElement('div');
         colLeft.classList.add('col-lg-6');
         colLeft.style.textAlign = 'left';
-        const colRight = document.createElement('div') as HTMLDivElement;
+        const colRight = document.createElement('div');
         colRight.classList.add('col-lg-6');
         colRight.style.textAlign = 'right';
 

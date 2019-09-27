@@ -26,7 +26,7 @@ export default class Editor {
         this._elem = elem;
         this._running = false;
 
-        const editorPane = document.createElement('div') as HTMLDivElement;
+        const editorPane = document.createElement('div');
         editorPane.classList.add('editor-pane');
         
         ace.config.set('basePath', './ace');
@@ -40,12 +40,12 @@ export default class Editor {
             this._tests = config.tests;
         }
 
-        const runBtn = document.createElement('button') as HTMLButtonElement;
+        const runBtn = document.createElement('button');
         runBtn.classList.add('run-btn');
         runBtn.textContent = 'Run!';
         runBtn.onclick = this.execute.bind(this);
 
-        const out = document.createElement('div') as HTMLDivElement;
+        const out = document.createElement('div');
         out.classList.add('output-area', 'hidden');
 
         elem.appendChild(editorPane);
@@ -117,14 +117,14 @@ export default class Editor {
         },
         'error': (line) => {
             line.classList.add('output-error');
-            const error = document.createElement('strong') as HTMLElement;
+            const error = document.createElement('strong');
             error.textContent = 'Error: ';
             line.insertBefore(error, line.firstChild);
             return line;
         },
         'pass': (line) => {
             line.classList.add('output-pass');
-            const check = document.createElement('span') as HTMLSpanElement;
+            const check = document.createElement('span');
             check.classList.add('indicator', 'pass-indicator');
             check.textContent = '✓';
             line.insertBefore(check, line.firstChild);
@@ -132,7 +132,7 @@ export default class Editor {
         },
         'fail': (line) => {
             line.classList.add('output-fail');
-            const check = document.createElement('span') as HTMLSpanElement;
+            const check = document.createElement('span');
             check.classList.add('indicator', 'fail-indicator');
             check.textContent = '✗';
             line.insertBefore(check, line.firstChild);
@@ -145,7 +145,7 @@ export default class Editor {
     };
 
     private static outputLine(line: string): HTMLSpanElement {
-        const elem = document.createElement('span') as HTMLSpanElement;
+        const elem = document.createElement('span');
         elem.classList.add('output-line');
         elem.textContent = line;
         return elem;
