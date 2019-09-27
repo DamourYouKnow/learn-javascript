@@ -24,6 +24,13 @@ const x = x + 9; // this is illegal, const variables can't be reassigned.
 Whether you use `let` or `const` should depend on if you want to be able to 
 modify the value of the variable after it is declared. 
 
+<div class="tip">
+
+**Tip:** Try to use `const` whenever possible as code where variables get 
+reassigned tends to be harder to read.
+
+</div>
+
 <div class="note">
 
 **Note**: The keyword `var` for declaring variables 
