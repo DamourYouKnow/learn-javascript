@@ -1,4 +1,5 @@
 let __output = [];
+let __consoleOutput = [];
 
 addEventListener('message', (message) => {
     const data = message.data;
@@ -23,7 +24,9 @@ addEventListener('message', (message) => {
 });
 
 function userconsolelog(item) {
-    __output.push({'type': 'default', 'content': item.valueOf()});
+    const value = item.valueOf();
+    __output.push({'type': 'default', 'content': value});
+    __consoleOutput.push(value);
 }
 
 const assert = {};
@@ -32,7 +35,12 @@ assert.equals = function(a, b, message) {
     if (a !== b) {
         throw Error(message);
     }
-    console.log('equals');
+};
+
+assert.notEquals = function(a, b, message) {
+    if (a === b) {
+        throw Error(message);
+    }
 };
 
 assert.ok = function(a, message) {

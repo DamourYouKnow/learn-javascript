@@ -59,6 +59,6 @@ The total cost is being calculated as the item price multiplied with itself
 instead of the item quantity.
 
 The next customer would like to buy 11 boxes of chocolate priced at $3.25 per 
-box. Fix lines 2 to 5 in the code below to properly handle this purchase.
+box. Fix the code below to properly handle this purchase.
 
 <div class="editor" source="exercise.js" tests="tests.js"></div>

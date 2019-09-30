@@ -1,3 +1,1 @@
-function foo() {
-    return 'Change me!';
-}
+console.log('Change me!');

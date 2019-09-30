@@ -1,9 +1,11 @@
 describe('The function foo', () => {
+    const output = __consoleOutput[0];
     it(`should return the string 'I am a programming wizard!'`, () => {
+        assert.ok(output, 'No string was output using console.log');
         assert.equals(
-            foo(),
+            output,
             'I am a programming wizard!',
-            `The string equals '${foo()}'`
+            `The string equals '${output}'`
         );
     });
 });
