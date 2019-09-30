@@ -1,4 +1,4 @@
-describe('The function foo', () => {
+describe('Your program', () => {
     const output = __consoleOutput[0];
     it(`should return the string 'I am a programming wizard!'`, () => {
         assert.ok(output, 'No string was output using console.log');

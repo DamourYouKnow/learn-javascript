@@ -1,4 +1,4 @@
-describe('The function purchaseCost', () => {
+describe('Your program', () => {
     const output = __consoleOutput[0];
     it('should compute the purchase cost as $3.25 * 11 = $32.75', () => {
         
