@@ -5,6 +5,9 @@ import Editor from './editor';
 import Request from './request';
 import UI from './ui';
 
+type NotificationType = 'tip' | 'note' | 'warning';
+type Renderer = (elem: HTMLElement) => HTMLElement;
+
 let editors: Editor[] = [];
 
 document.addEventListener('DOMContentLoaded', async function() {
@@ -72,6 +75,37 @@ async function loadLesson(path: string): Promise<void> {
             if (tests) config.tests = await Request.getFile(path + tests);
             
             editors.push(new Editor(elem as HTMLElement, config));
+        }
+
+        // Replace notification blocks.
+        const notifications: {[key in NotificationType]: Renderer} = {
+            'tip': (elem) => {
+                const label = document.createElement('strong');
+                label.textContent = 'Tip: ';
+                elem.prepend(label);
+                return elem;
+            },
+            'note': (elem) => {
+                const label = document.createElement('strong');
+                label.textContent = 'Note: ';
+                elem.prepend(label);
+                return elem;
+            },
+            'warning': (elem) => {
+                const label = document.createElement('strong');
+                label.textContent = 'Warning: ';
+                elem.appendChild(label);
+                return elem;
+            }
+        };
+        for (const key in notifications) {
+            document.querySelectorAll(`.${key}`).forEach((elem) => {
+                const htmlElem = elem as HTMLElement;
+                const newElem = notifications[key as NotificationType](
+                    htmlElem
+                );
+                elem.replaceWith(newElem);
+            });
         }
 
         // Add previous next button.

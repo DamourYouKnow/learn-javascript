@@ -26,16 +26,15 @@ modify the value of the variable after it is declared.
 
 <div class="tip">
 
-**Tip:** Try to use `const` whenever possible as code where variables get 
-reassigned tends to be harder to read.
+Try to use `const` whenever possible as code where variables get reassigned 
+tends to be harder to read.
 
 </div>
 
 <div class="note">
 
-**Note**: The keyword `var` for declaring variables 
-also exists in the language specification, however, the usage of this 
-keyword is no longer recommended.
+The keyword `var` for declaring variables also exists in the language 
+specification, however, the usage of this keyword is no longer recommended.
 
 </div>
 

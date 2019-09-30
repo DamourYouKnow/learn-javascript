@@ -73,7 +73,7 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 0px;
 }
 
-.note, .tip {
+.note, .tip, .warning {
     margin-bottom: 15px;
     border: 1px solid #D3D3D3;
     padding-top: 5px;
@@ -82,14 +82,17 @@ h1, h2, h3, h4, h5, h6 {
     padding-right: 10px;
     font-size: 15px;
 }
+.note p:last-child, .tip p:last-child, .warning p:last-child {
+    margin-bottom: 0;
+}
 .note {
-    background-color: rgb(253, 242, 229);
+    background-color: rgb(233, 233, 233);
 }
 .tip {
     background-color: rgb(229, 248, 253);
 }
-.note p:last-child, .tip p:last-child {
-    margin-bottom: 0;
+.warning {
+    background-color: rgb(253, 242, 229);
 }
 
 .sidebar {
