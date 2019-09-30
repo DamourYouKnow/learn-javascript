@@ -77,12 +77,11 @@ async function loadLesson(path: string): Promise<void> {
         // Add previous next button.
         // TODO: Refactor
         const btnRow = document.createElement('div');
-        btnRow.classList.add('row');
         const colLeft = document.createElement('div');
-        colLeft.classList.add('col-lg-6');
+        colLeft.classList.add('nav-btn-left');
         colLeft.style.textAlign = 'left';
         const colRight = document.createElement('div');
-        colRight.classList.add('col-lg-6');
+        colRight.classList.add('nav-btn-right');
         colRight.style.textAlign = 'right';
 
         const links = lessonLinks();

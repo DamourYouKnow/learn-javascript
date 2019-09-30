@@ -101,3 +101,11 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 800px;
     margin-bottom: 40px;
 }
+
+.nav-btn-left {
+    display: inline-block;
+}
+
+.nav-btn-right {
+    float: right;
+}
