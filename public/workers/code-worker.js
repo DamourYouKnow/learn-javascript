@@ -24,7 +24,12 @@ addEventListener('message', (message) => {
 });
 
 function userconsolelog(item) {
-    const value = item.valueOf();
+    const itemStr = (x) => {
+        if (x === null) return 'null';
+        if (x === undefined) return 'undefined';
+        return x.valueOf();
+    };
+    const value = itemStr(item);
     __output.push({'type': 'default', 'content': value});
     __consoleOutput.push(value);
 }

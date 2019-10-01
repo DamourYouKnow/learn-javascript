@@ -97,7 +97,7 @@ async function loadLesson(path: string): Promise<void> {
                 const label = document.createElement('strong');
                 label.innerHTML = 'Warning:&nbsp;';
                 label.style.cssFloat = 'left';
-                elem.appendChild(label);
+                elem.prepend(label);
                 return elem;
             }
         };
