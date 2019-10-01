@@ -81,19 +81,22 @@ async function loadLesson(path: string): Promise<void> {
         const notifications: {[key in NotificationType]: Renderer} = {
             'tip': (elem) => {
                 const label = document.createElement('strong');
-                label.textContent = 'Tip: ';
+                label.innerHTML = 'Tip:&nbsp;';
+                label.style.cssFloat = 'left';
                 elem.prepend(label);
                 return elem;
             },
             'note': (elem) => {
                 const label = document.createElement('strong');
-                label.textContent = 'Note: ';
+                label.innerHTML = 'Note:&nbsp;';
+                label.style.cssFloat = 'left';
                 elem.prepend(label);
                 return elem;
             },
             'warning': (elem) => {
                 const label = document.createElement('strong');
-                label.textContent = 'Warning: ';
+                label.innerHTML = 'Warning:&nbsp;';
+                label.style.cssFloat = 'left';
                 elem.appendChild(label);
                 return elem;
             }
