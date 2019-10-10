@@ -86,13 +86,13 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0;
 }
 .note {
-    background-color: rgb(236, 219, 234);
+    background-color: rgb(248, 247, 228);
 }
 .tip {
     background-color: rgb(229, 248, 253);
 }
 .warning {
-    background-color: rgb(253, 242, 229);
+    background-color: rgb(253, 229, 229);
 }
 
 .sidebar {
