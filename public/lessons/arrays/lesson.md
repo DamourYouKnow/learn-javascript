@@ -76,6 +76,23 @@ const removed = array.pop() // array is now ['a', 'b'], removed is 'c'
     Calling `pop` on an empty array will return `undefined`.
 </div>
 
+### unshift()
+
+Similar to `push`, however, items are added to the start of an array instead 
+of to the end.
+
+```js
+const array = [1, 2, 3];
+array.unshift(4, 5, 6) // array is now [4, 5, 6, 1, 2, 3] 
+```
+
+<div class="warning">
+
+The `unshift` function suffers from poor performance as as the entire array is 
+re-indexed behind the scenes.
+
+</div>
+
 ### shift()
 
 Similar to `pop`, however, the first item in the array is removed and returned 
@@ -116,9 +133,49 @@ const included2 = array.includes(5); // included2 is false
 
 ### slice()
 
+Returns a new array extracted from a starting and ending position in an 
+existing array.
+```js
+const slice = [10, 20, 30, 40, 50].slice(1, 3); // slice is [20, 30]
+```
+
+The end position is optional. If it is not provided the end of the array 
+will be used as the last position in the slice.
+```js
+const slice = [10, 20, 30, 40, 50].slice(2); // slice is [30, 40, 50]
+```
+
+The start and end positions can also be negative indexes. In this case the 
+slice index will be an offset from the end of the array. 
+```js
+const slice = [10, 20, 30, 40, 50].slice(0, -2); // slice is [10, 20, 30]
+```
+
+<div class="note">
+
+The `slice` function does not modify the original array.
+
+</div>
+
 ### splice()
 
+
 ### join()
+
+Concatenates elements in an array into a string using a a string as a 
+separator.
+```js
+const cities = ['Ottawa', 'Toronto', 'Montreal'];
+const hyphens = cities.join('--'); // hyphens is 'Ottawa--Toronto--Montreal'
+const spaces = cities.join(' '); // spaces is 'Ottawa Toronto Montreal'
+const noSeparator = cities.join(''); // noSeparator is 'OttawaTorontoMontreal'
+```
+
+If no separator string is provided the default `','` will be used.
+```js
+const cities = ['Ottawa', 'Toronto', 'Montreal'];
+const default = cities.join(); // default is 'Ottawa,Toronto,Montreal'
+```
 
 <div class="note">
 
