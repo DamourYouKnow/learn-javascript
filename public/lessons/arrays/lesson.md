@@ -65,25 +65,54 @@ const array = ['a', 'b', 'c'];
 array.pop() // array is now ['a', 'b'] 
 ```
 
-The `pop` function also returns the item that was removed.
+This function also returns the item that was removed.
 
 ```js
 const array = ['a', 'b', 'c'];
 const removed = array.pop() // array is now ['a', 'b'], removed is 'c'
 ```
 
+<div class="note">
+    Calling `pop` on an empty array will return `undefined`.
+</div>
+
 ### shift()
+
+Similar to `pop`, however, the first item in the array is removed and returned 
+instead of the last.
+
+```js
+const array = ['a', 'b', 'c'];
+array.pop() // array is now ['b', 'c'] 
+```
 
 <div class="warning">
 
-The shift function suffers from poor performance as as the entire array is 
+The `shift` function suffers from poor performance as as the entire array is 
 re-indexed behind the scenes.
 
 </div>
 
 ### indexOf()
 
+Returns the index of the first matching element in an array. This function 
+will return  `-1` if the item is not in the array.
+
+```js
+const array = ['one', 'two', 'three'];
+const index = array.indexOf('two'); // index is 1
+const index2 = array.indexOf('four'); // index2 is -1
+```
+
 ### includes()
+
+Returns `true` if an item is in an array, otherwise it will return `false`.
+
+```js
+const array = [2, 4, 6, 8];
+const included = array.includes(4); // included is true
+const included2 = array.includes(5); // included2 is false
+```
 
 ### slice()
 
