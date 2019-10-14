@@ -54,6 +54,10 @@ assert.ok = function(a, message) {
     }
 };
 
+assert.fail = function(message) {
+    throw Error(message);
+};
+
 function describe(item, fn) {
     __output.push({'type': 'label', 'content': item});
     fn();
