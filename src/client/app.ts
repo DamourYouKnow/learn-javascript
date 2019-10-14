@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 async function resolveLesson(): Promise<void> {
     const target = window.location.hash;
+    window.scrollTo(0, 0);
     const welcome = document.getElementById('welcome');
     if (!welcome) throw Error('Welcome section not found');
     if (!target) {
