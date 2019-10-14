@@ -34,7 +34,8 @@ tends to be harder to read.
 <div class="note">
 
 The keyword `var` for declaring variables also exists in the language 
-specification, however, the usage of this keyword is no longer recommended.
+specification, however, the usage of this keyword is no longer recommended so 
+it will not be covered in these tutorials.
 
 </div>
 
