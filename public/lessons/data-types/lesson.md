@@ -8,22 +8,17 @@ such as `3.14` or `-1.23`.
 
 This type is useful for performing arithmetic. The following basic operations 
 can be performed on the **number** type:
-- Addition: `5 + 10` returns `15`.
-- Subtraction: `5 - 10` returns `-5`.
-- Multiplication: `5 * 10` returns `50`.
-- Division: `5 / 10` returns `0.5`.
-- Exponentiation: `5 ** 10` returns `9765625`.
-- Modulus (division remainder): `5 % 10` returns `5`.
+
+1. Exponentiation: `5 ** 10` returns `9765625`.
+2. Multiplication: `5 * 10` returns `50`.
+3. Division: `5 / 10` returns `0.5`.
+4. Modulus (division remainder): `5 % 10` returns `5`.
+5. Addition: `5 + 10` returns `15`.
+6. Subtraction: `5 - 10` returns `-5`.
 
 Parentheses can be used to determine the order of operations when performing 
-arithmetic. If no parentheses are provided then operations will be performed in 
-the following order:
-1. Exponentiation (`**`)
-2. Multiplication (`*`)
-3. Division (`/`)
-4. Modulus (`%`)
-5. Addition (`+`)
-6. Subtraction (`-`)
+arithmetic. If no parentheses are provided then operations will be performed 
+in the order listed above.
 
 Try to guess what the following output will be:
 
