@@ -73,18 +73,29 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 0px;
 }
 
-.note, .tip, .warning {
+.notification-table {
+    display: table;
+}
+
+.notification {
     margin-bottom: 15px;
     border: 1px solid #D3D3D3;
+    display: table;
+    width: 100%;
+}
+
+.notification-content {
+    display: table-cell;
+    font-size: 15px;
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 10px;
     padding-right: 10px;
-    font-size: 15px;
 }
-.note p:last-child, .tip p:last-child, .warning p:last-child {
-    margin-bottom: 0;
+.notification-content p:last-child {
+    margin-bottom: 5px;
 }
+
 .note {
     background-color: rgb(252, 251, 237);
 }
@@ -93,6 +104,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 .warning {
     background-color: rgb(255, 242, 242);
+}
+
+.notification-stub {
+    display: table-cell;
+    width: 40px;
+    font-size: 22px;
+    text-align: center;
+    vertical-align: center;
+}
+.note > .notification-stub {
+    background-color: rgb(236, 217, 133);
+}
+.tip > .notification-stub {
+    background-color: rgb(101, 193, 236);
+}
+.warning > .notification-stub {
+    background-color: rgb(236, 124, 124); 
 }
 
 .sidebar {

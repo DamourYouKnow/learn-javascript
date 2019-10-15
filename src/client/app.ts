@@ -79,27 +79,49 @@ async function loadLesson(path: string): Promise<void> {
         }
 
         // Replace notification blocks.
+        // TODO: A lot of duplicate code here.
         const notifications: {[key in NotificationType]: Renderer} = {
             'tip': (elem) => {
-                const label = document.createElement('strong');
-                label.innerHTML = 'Tip:&nbsp;';
-                label.style.cssFloat = 'left';
-                elem.prepend(label);
-                return elem;
+                const container = document.createElement('div');
+                container.classList.add('notification', 'tip');
+                const stub = document.createElement('div');
+                stub.classList.add('notification-stub');
+                const icon = document.createElement('i');
+                icon.classList.add(
+                    'icon-tip', 'far', 'fa-lightbulb');
+                stub.appendChild(icon);
+                elem.className = "notification-content";
+                container.appendChild(stub);
+                container.appendChild(elem.cloneNode(true));
+                return container;
             },
             'note': (elem) => {
-                const label = document.createElement('strong');
-                label.innerHTML = 'Note:&nbsp;';
-                label.style.cssFloat = 'left';
-                elem.prepend(label);
-                return elem;
+                const container = document.createElement('div');
+                container.classList.add('notification', 'note');
+                const stub = document.createElement('div');
+                stub.classList.add('notification-stub');
+                const icon = document.createElement('i');
+                icon.classList.add(
+                    'icon-note', 'far', 'fa-bookmark');
+                stub.appendChild(icon);
+                elem.className = "notification-content";
+                container.appendChild(stub);
+                container.appendChild(elem.cloneNode(true));
+                return container;
             },
             'warning': (elem) => {
-                const label = document.createElement('strong');
-                label.innerHTML = 'Warning:&nbsp;';
-                label.style.cssFloat = 'left';
-                elem.prepend(label);
-                return elem;
+                const container = document.createElement('div');
+                container.classList.add('notification', 'warning');
+                const stub = document.createElement('div');
+                stub.classList.add('notification-stub');
+                const icon = document.createElement('i');
+                icon.classList.add(
+                    'icon-warning', 'fas', 'fa-exclamation-triangle');
+                stub.appendChild(icon);
+                elem.className = "notification-content";
+                container.appendChild(stub);
+                container.appendChild(elem.cloneNode(true));
+                return container;
             }
         };
         for (const key in notifications) {
