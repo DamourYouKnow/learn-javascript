@@ -26,7 +26,7 @@ Try to guess what the following output will be:
 
 If you guessed `12` you were correct!
 
-### String
+## String
 
 The **String** type holds a sequence of characters such as `"Hello, world!"` 
 or `"JavaScript is fun!"`.
@@ -34,7 +34,7 @@ or `"JavaScript is fun!"`.
 Strings can be concatenated together with the `+` operator. For example, 
 `'Hello, ' + 'World' + '!'` returns `'Hello, World!'`
 
-### Boolean
+## Boolean
 
 The **Boolean** type holds either a value of  either `true` or `false` and is 
 useful for when we want our program to make decisions. We'll learn more about 
