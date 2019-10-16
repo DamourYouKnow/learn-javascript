@@ -1,13 +1,36 @@
 body {
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 h1 {
-    border-bottom: solid 1px #dec027; 
+    border-bottom: solid 2px #dec027; 
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
+}
+h2 {
+    font-size: 1.75rem;
+}
+h3 {
+    font-size: 1.50rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin-bottom: 15px;
+p {
+    margin-bottom:1.5em
+}
+
+ul {
+    margin-bottom: 1.5em;
+}
+
+pre {
+    padding-left: 0.9em;
+    margin-bottom:1.5em;
+    border-left: solid 4px #d3d3d3;
+}
+
+.hljs {
+    padding: 0;
 }
 
 .hidden {
@@ -28,6 +51,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     max-height: 300px;
     resize: none;
+    font-size: 17px;
     font-family: 'Courier New', Courier, monospace;
     overflow-y: scroll;
     border: 1px solid #D3D3D3;
@@ -56,8 +80,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .indicator {
-    margin-right: 6px;
-    font-size: 18px;
+    margin-right: 0.5em;
+    font-size: 1em;
 }
 
 .pass-indicator {
@@ -78,22 +102,26 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .notification {
-    margin-bottom: 15px;
-    border: 1px solid #D3D3D3;
+    margin-bottom: 1.5em;
+    border: 1px solid #d3d3d3;
     display: table;
     width: 100%;
 }
 
 .notification-content {
     display: table-cell;
-    font-size: 15px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
+    font-size: 0.9em;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    vertical-align: middle;
 }
-.notification-content p:last-child {
-    margin-bottom: 5px;
+.notification-content *:last-child {
+    margin-bottom: 0;
+}
+.notification-content code {
+    background-color: inherit;
 }
 
 .note {
@@ -108,10 +136,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .notification-stub {
     display: table-cell;
-    width: 40px;
-    font-size: 22px;
+    padding-left: 0.5em; 
+    padding-right: 0.5em;
+    width: 2em;
+    font-size: 1.2em;
     text-align: center;
-    vertical-align: center;
+    vertical-align: middle;
+    color: #303030;
 }
 .note > .notification-stub {
     background-color: rgb(236, 217, 133);
@@ -124,7 +155,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sidebar {
-    border-right: 1px solid #D3D3D3;
+    border-right: 1px solid #d3d3d3;
 }
 
 .lesson-container {
@@ -133,10 +164,12 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 40px;
 }
 
+.nav-btn-row {
+    margin-top: 3em;
+}
 .nav-btn-left {
     display: inline-block;
 }
-
 .nav-btn-right {
     float: right;
 }
