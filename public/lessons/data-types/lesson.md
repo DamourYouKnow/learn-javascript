@@ -1,6 +1,6 @@
 # Data Types
 
-### Number
+## Number
 
 The **Number** type is used to represent a numerical value. This can either 
 be an integer value such as `1`, `2`, or `-3` or it can be a decimal value 
