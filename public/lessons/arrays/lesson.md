@@ -157,9 +157,6 @@ The `slice` function does not modify the original array.
 
 </div>
 
-### splice()
-
-
 ### join()
 
 Concatenates elements in an array into a string using a a string as a 
@@ -183,3 +180,25 @@ Later on we will learn about some more useful array functions such as `map`,
 `reduce`, `filter`, and `sort`.
 
 </div>
+
+## Exercise
+
+Write a function named `list` that takes in a list of strings as input and 
+returns a string representing the list as it would appear in the English 
+language.
+
+Items in the array should be separated by a comma and a space.
+
+The conjunction `and` should be inserted before the last item in the array if 
+the array has 2 or more items. Do not insert a comma if the array has exactly 
+two items.
+
+Consider the following examples:
+- An input of `['celery', 'lettuce', 'potatoes']` should return the string 
+`'celery, lettuce, and potatoes'`.
+- An input of `['celery', lettuce]` should return the string 
+`'celery and lettuce'`.
+- An input of `['celery']` should return `'celery'`.
+- An input of `[]` should return the empty string `''`.
+
+<div class="editor" tests="list-test.js">
