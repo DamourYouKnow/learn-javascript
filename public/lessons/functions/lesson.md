@@ -2,17 +2,21 @@
 
 ## What are functions?
 
+A **function** is a section of code that performs a specific task. A function 
+will typically have multiple inputs and produce one output.
+
 There are many reasons why functions are very useful:
 1. They allow for code to be reused. Instead of constantly rewriting the same 
 code to compute the volume of a cylinder you could instead create a function 
 that takes in a radius and length as input and returns a volume.
-2. They create an abstraction for functionality in your code. As long as 
+2. They allow for code to be organized by grouping together the steps required 
+for each task.
+3. They create an abstraction for functionality in your code. As long as 
 someone knows what a function does they do not need to understand the details 
 of the function's implementation.
 
 A good rule for writing good functions is that they should have a **single 
 responsibility**. A good function will do one thing and one thing only.
-
 
 ## Creating functions
 
@@ -32,7 +36,7 @@ function sum(a, b) {
 The keyword `function` is used to declare the function.
 
 The `function` keyword is followed by the name of the function, `sum`, and a 
-set of parentheses containing the input parameters of the function seperated by 
+set of parentheses containing the input parameters of the function separated by 
 commas, `a` and `b`. Function parameters function in the same way that 
 variables do, however, the values stored inside them are declared outside of 
 the function. 
