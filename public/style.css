@@ -39,6 +39,30 @@ pre {
     display: none;
 }
 
+.no-style {
+    list-style: none;
+}
+
+.sidebar {
+    border-right: 1px solid #d3d3d3;
+    overflow-x: hidden;
+}
+
+.sidebar ul {
+    margin: 0;
+}
+
+#home-link {
+    font-weight: bold;
+    font-size: 1.8rem;
+    text-decoration: underline;
+}
+
+.selected {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
 .editor-pane {
     width: 100%;
     height: 250px;
@@ -154,10 +178,6 @@ pre {
 }
 .warning > .notification-stub {
     background-color: rgb(236, 124, 124); 
-}
-
-.sidebar {
-    border-right: 1px solid #d3d3d3;
 }
 
 .lesson-container {

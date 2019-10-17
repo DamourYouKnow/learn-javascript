@@ -41,10 +41,12 @@ async function resolveLesson(): Promise<void> {
     }
 
     const links = lessonLinks();
+    links.forEach((link) => link.classList.toggle('selected', false));
     const clicked = links.find((link) => {
         return `#${link.href.split('#')[1]}` === target;
     });
     if (clicked) {
+        clicked.classList.toggle('selected', true);
         const path = clicked.getAttribute('path');
         if (path) await loadLesson(path);
     }

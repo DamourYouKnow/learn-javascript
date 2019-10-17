@@ -3,69 +3,77 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/xcode.min.css">
-    <link href="./fontawesome/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/xcode.min.css">
+  <link href="./fontawesome/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
 <body>
-    <div class="container-fluid">
-        <br/>
-        <div class="row">
-            <div class="col-md-2 sidebar">
-                Lessons
-                <ul id="lesson-links">
-                    <li>
-                        <a href="#hello-world" path="./lessons/hello-world/">Hello World</a>
-                    </li>
-                    <li>
-                        <a href="#data-types" path="./lessons/data-types/">Data Types</a>
-                    </li>
-                    <li>
-                        <a href="#variables" path="./lessons/variables/">Variables</a>
-                    </li>
-                    <li>
-                        <a href="#functions" path="./lessons/functions/">Functions</a>
-                    </li>
-                    <li>
-                        <a href="#conditionals" path="./lessons/conditionals/">Conditionals</a>
-                    </li>
-                    <li>
-                        <a href="#arrays" path="./lessons/arrays/">Arrays</a> 
-                    </li>
-                </ul>
-            </div>
+  <div class="container-fluid">
+    <br />
+    <div class="row">
+      <div class="col-md-2 sidebar">
+        <nav>
+          <ul class="no-style">
+            <li>
+              <a id="home-link" href="">Home</a>
+            </li>
+          </ul>
+          <ul id="lesson-links" class="no-style">
+            <li>
+              <a href="#hello-world" path="./lessons/hello-world/">Hello World</a>
+            </li>
+            <li>
+              <a href="#data-types" path="./lessons/data-types/">Data Types</a>
+            </li>
+            <li>
+              <a href="#variables" path="./lessons/variables/">Variables</a>
+            </li>
+            <li>
+              <a href="#functions" path="./lessons/functions/">Functions</a>
+            </li>
+            <li>
+              <a href="#conditionals" path="./lessons/conditionals/">Conditionals</a>
+            </li>
+            <li>
+              <a href="#arrays" path="./lessons/arrays/">Arrays</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
 
-            <div class="col-md-10">
-                <div id="welcome" class="container lesson-container">
-                    <h1>Welcome to LearnJS</h1>
+      <div class="col-md-10">
+        <div id="welcome" class="container lesson-container">
+          <h1>Welcome to LearnJS</h1>
 
-                    <p>This website contains a series of JavaScript tutorials with interactive exercises.</p>
+          <p>This website contains a series of JavaScript tutorials with interactive exercises.</p>
 
-                    <p>Please make sure you are using an up to date version of one of the following web browsers:</p>
-                    <ul>
-                        <li>Firefox</li>
-                        <li>Chrome</li>
-                        <li>Edge</li>
-                        <li>Safari</li>
-                        <li>Opera</li>
-                    </ul>
+          <p>Please make sure you are using an up to date version of one of the following web browsers:</p>
+          <ul>
+            <li>Firefox</li>
+            <li>Chrome</li>
+            <li>Edge</li>
+            <li>Safari</li>
+            <li>Opera</li>
+          </ul>
 
-                    <p><a href="#hello-world">Click here to start learning!</a></p>
-                </div>
-                <div class="container lesson-container">
-                    <div id="lesson">
-                        <!-- Content loaded here during runtime. -->
-                    </div>
-                </div>         
-            </div>
+          <p><a href="#hello-world">Click here to start learning!</a></p>
         </div>
+        <div class="container lesson-container">
+          <main>
+          <div id="lesson">
+            <!-- Content loaded here during runtime. -->
+          </div>
+          </main>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <script src="./scripts/app.js"></script>
+  <script src="./scripts/app.js"></script>
 </body>
 
-</html> 
+</html>
