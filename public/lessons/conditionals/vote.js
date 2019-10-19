@@ -1,0 +1,3 @@
+function eligibleToVote(citizen, age) {
+    
+}
