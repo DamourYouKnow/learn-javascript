@@ -7,6 +7,12 @@ namespace UI {
         btn.setAttribute('role', 'button');
         return btn;
     }
+
+    export function enabled(elem: HTMLButtonElement, value: boolean) {
+        elem.setAttribute('aria-disabled', String(!value));
+        elem.disabled = !value;
+        elem.classList.toggle('disabled', !value);
+    }
 }
 
 export default UI;

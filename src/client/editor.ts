@@ -1,6 +1,7 @@
 import ace from 'ace-builds';
 
 import Utils from './utils';
+import UI from './ui';
 
 interface EditorConfig {
     content?: string;
@@ -21,6 +22,8 @@ export default class Editor {
     private _default = '';
     private _tests?: string;
     private _running: boolean;
+    private _runBtn: HTMLButtonElement;
+    private _resetBtn: HTMLButtonElement;
 
     public constructor(elem: HTMLElement, config?: EditorConfig) {
         this._elem = elem;
@@ -41,28 +44,30 @@ export default class Editor {
         }
 
         // Run button
-        const runBtn = document.createElement('button');
-        runBtn.classList.add('run-btn', 'editor-btn');
-        runBtn.onclick = this.execute.bind(this);
+        this._runBtn = document.createElement('button');
+        UI.enabled(this._runBtn, this.content != '');
+        this._runBtn.classList.add('run-btn', 'editor-btn');
+        this._runBtn.onclick = this.execute.bind(this);
         const runBtnLabel = document.createElement('i');
         runBtnLabel.classList.add('fas', 'fa-play');
-        runBtn.appendChild(runBtnLabel);
-        runBtn.appendChild(document.createTextNode('Run'));
+        this._runBtn.appendChild(runBtnLabel);
+        this._runBtn.appendChild(document.createTextNode('Run'));
 
         // Reset button
-        const resetBtn = document.createElement('button');
-        resetBtn.classList.add('reset-btn', 'editor-btn');
-        resetBtn.onclick = () => this._editor.setValue(this._default, 1);
+        this._resetBtn = document.createElement('button');
+        UI.enabled(this._resetBtn, this.content != this.default);
+        this._resetBtn.classList.add('reset-btn', 'editor-btn');
+        this._resetBtn.onclick = () => this._editor.setValue(this._default, 1);
         const resetBtnLabel = document.createElement('i');
         resetBtnLabel.classList.add('fas', 'fa-undo-alt');
-        resetBtn.appendChild(resetBtnLabel);
-        resetBtn.appendChild(document.createTextNode('Reset'));
+        this._resetBtn.appendChild(resetBtnLabel);
+        this._resetBtn.appendChild(document.createTextNode('Reset'));
 
         // Control panel
         const controlPanel = document.createElement('div');
         controlPanel.classList.add('editor-controls');
-        controlPanel.appendChild(runBtn);
-        controlPanel.appendChild(resetBtn);
+        controlPanel.appendChild(this._runBtn);
+        controlPanel.appendChild(this._resetBtn);
 
         const out = document.createElement('div');
         out.classList.add('output-area', 'hidden');
@@ -71,6 +76,16 @@ export default class Editor {
         elem.appendChild(controlPanel);
         elem.appendChild(out);
         elem.appendChild(document.createElement('br'));
+
+        // Handle change event
+        let timer: ReturnType<typeof setTimeout> | null = null;
+        this._editor.on('change', () => {
+            if (timer) clearTimeout(timer);
+            timer = setTimeout(() => {
+                UI.enabled(this._runBtn, this.content != '');
+                UI.enabled(this._resetBtn, this.content != this.default);
+            }, 250);
+        });
     }
 
     public get elem(): HTMLElement {
@@ -81,6 +96,10 @@ export default class Editor {
         return this._default;
     }
 
+    public get content(): string {
+        return this._editor.getSession().getValue();
+    }
+
     public set tests(value: string) {
         this._tests = value;
     }
@@ -89,7 +108,7 @@ export default class Editor {
         if (this._running) return;
 
         const code = Utils.replace(
-            this._editor.getSession().getValue(),
+            this.content,
             'console.log',
             'userconsolelog'
         );

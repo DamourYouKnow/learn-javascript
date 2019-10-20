@@ -96,6 +96,10 @@ pre {
 .reset-btn {
     color: rgb(56, 66, 155);
 }
+.editor-btn.disabled {
+    color: grey;
+    cursor: not-allowed;
+}
 
 .output-area {
     width: 100%;
