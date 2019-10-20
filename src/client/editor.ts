@@ -47,6 +47,7 @@ export default class Editor {
         const runBtnLabel = document.createElement('i');
         runBtnLabel.classList.add('fas', 'fa-play');
         runBtn.appendChild(runBtnLabel);
+        runBtn.appendChild(document.createTextNode('Run'));
 
         // Reset button
         const resetBtn = document.createElement('button');
@@ -55,6 +56,7 @@ export default class Editor {
         const resetBtnLabel = document.createElement('i');
         resetBtnLabel.classList.add('fas', 'fa-undo-alt');
         resetBtn.appendChild(resetBtnLabel);
+        resetBtn.appendChild(document.createTextNode('Reset'));
 
         // Control panel
         const controlPanel = document.createElement('div');
