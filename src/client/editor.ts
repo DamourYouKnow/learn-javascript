@@ -40,16 +40,24 @@ export default class Editor {
             this._tests = config.tests;
         }
 
+        // Run button
         const runBtn = document.createElement('button');
-        runBtn.classList.add('run-btn');
-        runBtn.textContent = 'Run!';
+        runBtn.classList.add('run-btn', 'editor-btn');
         runBtn.onclick = this.execute.bind(this);
+        const runBtnLabel = document.createElement('i');
+        runBtnLabel.classList.add('fas', 'fa-play');
+        runBtn.appendChild(runBtnLabel);
+
+        // Control panel
+        const controlPanel = document.createElement('div');
+        controlPanel.classList.add('editor-controls');
+        controlPanel.appendChild(runBtn);
 
         const out = document.createElement('div');
         out.classList.add('output-area', 'hidden');
 
         elem.appendChild(editorPane);
-        elem.appendChild(runBtn);
+        elem.appendChild(controlPanel);
         elem.appendChild(out);
         elem.appendChild(document.createElement('br'));
     }

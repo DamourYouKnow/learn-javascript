@@ -69,8 +69,27 @@ pre {
     border: solid 1px #373b3e;
 }
 
+.editor-controls {
+    background-color: #f3f3f3;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    border-left: solid 1px #373b3e;
+    border-right: solid 1px #373b3e;
+    border-bottom: solid 1px #373b3e;
+}
+
+.editor-btn {
+    font-size: 1.2em;
+    font-family: inherit;
+    border: 0;
+    padding: 0;
+    background-color: inherit;
+    cursor: pointer;
+}
+
 .run-btn  {
-    display: block;
+    display: inline-block;
+    color: rgb(21, 88, 21);
 }
 
 .output-area {
@@ -80,7 +99,9 @@ pre {
     font-size: 17px;
     font-family: 'Courier New', Courier, monospace;
     overflow-y: scroll;
-    border: 1px solid #d3d3d3;
+    border-left: 1px solid #d3d3d3;
+    border-right: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
 }
 
 .output-line {
