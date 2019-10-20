@@ -103,7 +103,7 @@ pre {
     resize: none;
     font-size: 17px;
     font-family: 'Courier New', Courier, monospace;
-    overflow-y: scroll;
+    overflow: auto;
     border-left: 1px solid #d3d3d3;
     border-right: 1px solid #d3d3d3;
     border-bottom: 1px solid #d3d3d3;
