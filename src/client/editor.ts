@@ -48,10 +48,19 @@ export default class Editor {
         runBtnLabel.classList.add('fas', 'fa-play');
         runBtn.appendChild(runBtnLabel);
 
+        // Reset button
+        const resetBtn = document.createElement('button');
+        resetBtn.classList.add('reset-btn', 'editor-btn');
+        resetBtn.onclick = () => this._editor.setValue(this._default, 1);
+        const resetBtnLabel = document.createElement('i');
+        resetBtnLabel.classList.add('fas', 'fa-undo-alt');
+        resetBtn.appendChild(resetBtnLabel);
+
         // Control panel
         const controlPanel = document.createElement('div');
         controlPanel.classList.add('editor-controls');
         controlPanel.appendChild(runBtn);
+        controlPanel.appendChild(resetBtn);
 
         const out = document.createElement('div');
         out.classList.add('output-area', 'hidden');
