@@ -87,6 +87,12 @@ pre {
     background-color: inherit;
     cursor: pointer;
 }
+.editor-btn:active {
+    font-size: 1em;
+}
+.editor-btn:hover {
+    background-color: rgb(228, 227, 227);
+}
 .editor-btn > i {
     padding-right: 0.3em;
 }
