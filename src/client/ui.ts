@@ -13,6 +13,14 @@ namespace UI {
         elem.disabled = !value;
         elem.classList.toggle('disabled', !value);
     }
+
+    export function enable(elem: HTMLButtonElement) {
+        enabled(elem, true);
+    }
+
+    export function disable(elem: HTMLButtonElement) {
+        enabled(elem, false);
+    }
 }
 
 export default UI;

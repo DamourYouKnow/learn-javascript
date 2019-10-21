@@ -82,9 +82,15 @@ export default class Editor {
         this._editor.on('change', () => {
             if (timer) clearTimeout(timer);
             timer = setTimeout(() => {
-                UI.enabled(this._runBtn, this.content != '');
+                const runEnabled = this.content != '' && !this.hasError();
+                UI.enabled(this._runBtn, runEnabled);
                 UI.enabled(this._resetBtn, this.content != this.default);
-            }, 250);
+            }, 300);
+        });
+        // @ts-ignore
+        this._editor.getSession().on('changeAnnotation', () => {
+            const runEnabled = this.content != '' && !this.hasError();
+            UI.enabled(this._runBtn, runEnabled);
         });
     }
 
@@ -197,5 +203,10 @@ export default class Editor {
             area.appendChild(
                 Editor.render[line.type](Editor.outputLine(line.content)));
         }
+    }
+
+    private hasError(): boolean {
+        const annotations = this._editor.getSession().getAnnotations();
+        return annotations.find((x) => x.type == 'error') != undefined;
     } 
 }
