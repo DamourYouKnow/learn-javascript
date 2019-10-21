@@ -72,7 +72,7 @@ using `console.log`:
 - The fourth line should output `null`.
 - The fifth line should output `undefined`.
 
-<div class="editor" tests="datatypes-test.js"></div>
+<div class="editor" test="datatypes-test.js"></div>
 
 For more information on data types, check out 
 [Mozilla's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).

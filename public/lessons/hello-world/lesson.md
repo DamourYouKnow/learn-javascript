@@ -53,4 +53,4 @@ will be given immediate feedback.
 This first exercise is simple. Change the **string** on the first line to 
 `'I am learning JavaScript!'`
 
-<div class="editor" source="exercise.js" tests="tests.js"></div>
+<div class="editor" source="exercise.js" test="exercise-test.js"></div>

@@ -61,4 +61,4 @@ instead of the item quantity.
 The next customer would like to buy 11 boxes of chocolate priced at $3.25 per 
 box. Fix the code below to properly handle this purchase.
 
-<div class="editor" source="exercise.js" tests="tests.js"></div>
+<div class="editor" source="cost.js" test="cost-test.js"></div>

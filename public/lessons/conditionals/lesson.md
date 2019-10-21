@@ -211,4 +211,4 @@ eligible to vote. If a person is eligible to vote return
 `'You are eligible to vote!'`. If they are not return 
 `'You are not eligible to vote!'`.
 
-<div class="editor" source="vote.js" tests="vote-test.js">
+<div class="editor" source="vote.js" test="vote-test.js">

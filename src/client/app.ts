@@ -71,7 +71,7 @@ async function loadLesson(path: string): Promise<void> {
 
         for (const elem of elems) {
             const source = elem.getAttribute('source');
-            const tests = elem.getAttribute('tests');
+            const tests = elem.getAttribute('test');
 
             const config: EditorConfig = {};
             if (source) config.content = await Request.getFile(path + source);

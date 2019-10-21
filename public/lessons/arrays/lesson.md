@@ -201,4 +201,4 @@ Consider the following examples:
 - An input of `['celery']` should return `'celery'`.
 - An input of `[]` should return the empty string `''`.
 
-<div class="editor" tests="list-test.js">
+<div class="editor" test="list-test.js">
