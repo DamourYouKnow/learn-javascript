@@ -170,8 +170,8 @@ const noSeparator = cities.join(''); // noSeparator is 'OttawaTorontoMontreal'
 
 If no separator string is provided the default `','` will be used.
 ```js
-const cities = ['Ottawa', 'Toronto', 'Montreal'];
-const default = cities.join(); // default is 'Ottawa,Toronto,Montreal'
+// cities is 'Ottawa,Toronto,Montreal'
+const cities = ['Ottawa', 'Toronto', 'Montreal'].join();
 ```
 
 <div class="note">
