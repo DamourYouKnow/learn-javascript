@@ -7,16 +7,28 @@ addEventListener('message', (message) => {
     if (data.tests) {
         code += `\n${data.tests}`;
     }
-    console.log(code);
 
     try {
         eval(code);
-        console.log(__output);
         postMessage({'success': true, 'output': __output});
     } catch (err) {
+        let line = undefined;
+        if (err.stack) {
+            const lineCols = err.stack.match(/(>:\d+:\d+)|(:\d+:\d+)/g);
+            if (lineCols) {
+                const chromeLineCol = lineCols.find((lc) => lc.startsWith('>'));
+                if (chromeLineCol) {
+                    line = chromeLineCol.split(':')[1];
+                } else {
+                    line = lineCols[0].split(':')[1];
+                }
+            }
+        }
+
+        const content = line ? `Line ${line} - ${err.message}`: err.message
         postMessage({
             'success': false, 
-            'output': [{'type': 'error', 'content': err.message}]
+            'output': [{'type': 'error', 'content': content}]
         });
     } finally {
         __output = [];
