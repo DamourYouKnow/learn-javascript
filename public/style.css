@@ -126,6 +126,7 @@ pre {
 }
 
 .output-label {
+    border-top: 1px solid #d3d3d3;
     font-weight: bold;
 }
 
