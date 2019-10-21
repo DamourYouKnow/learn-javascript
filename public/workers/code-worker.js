@@ -36,14 +36,21 @@ addEventListener('message', (message) => {
 });
 
 function userconsolelog(item) {
-    const itemStr = (x) => {
-        if (x === null) return 'null';
-        if (x === undefined) return 'undefined';
-        return x.valueOf();
-    };
-    const value = itemStr(item);
+    const value = formatConsole(item);
     __output.push({'type': 'default', 'content': value});
-    __consoleOutput.push(value);
+    __consoleOutput.push(item);
+}
+
+function formatConsole(val) {
+    if (val === null) return 'null';
+    if (val == null || typeof val === 'string' || typeof val === 'number') {
+        return String(val);
+    }
+    if (val.length) {
+        return `[${Array.prototype.map.call(val, formatConsole).join(', ')}]`;
+    }
+    if (val.toString) return val.toString();
+    return String(val);
 }
 
 const assert = {};
