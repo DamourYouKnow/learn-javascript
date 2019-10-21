@@ -30,7 +30,7 @@ Any text following `//` on the same line is are inline comments.
 // this is a comment.
 ```
 
-Any text following `/*` and and before `*/` are block comments.
+Any text following `/*` and before `*/` are block comments.
 ```js
 /*
 This...
