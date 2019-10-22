@@ -1,5 +1,8 @@
 # Data Types
 
+JavaScript is able to present data in different forms called **data types**. 
+We will start of by learning about five different basic data types.
+
 ## Number
 
 The **number** type is used to represent a numerical value. This can either 
@@ -65,7 +68,7 @@ through different examples where the two values are used.
 ## Exercise
 
 Write out four separate statements that output values of different data types 
-using `console.log`:
+using `console.log()`.
 - The first line should output a **number**.
 - The second line should output a **string**.
 - The third line should output a **boolean**.

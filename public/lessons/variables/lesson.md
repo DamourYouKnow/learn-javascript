@@ -1,11 +1,12 @@
 # Variables
 
 A **variable** allows you to store values of different data types in the 
-memory of your program. Variables are given a name by the programmer so that 
-the value stored in the variable can be retrieved for computation at a later 
-time.
+memory of your program. Variables are given are identified by a unique name 
+so that the value stored in the variable can be retrieved for computation at 
+a later time.
 
 There are two keywords you can use to declare a variable, `let` and `const`. 
+The `=` operator is used to assign a value into a variable.
 
 A variable declared with `let` can be reassigned a new value after 
 it has been declared:
@@ -19,6 +20,12 @@ declaration:
 ```js
 const x = 30; // the value of x is 30 after executing this line.
 const x = x + 9; // this is illegal, const variables can't be reassigned.
+```
+
+A variable can also be declared without being assigned a value. In this case, 
+the value of the variable will be `undefined`.
+```js
+const x; // the value of x is undefined.
 ```
 
 Whether you use `let` or `const` should depend on if you want to be able to 
@@ -47,7 +54,14 @@ value of `myNumber` in the third line. What do you think the output will be?
 
 If you guessed `30` you were correct!
 
-## Exercise
+<div class="tip">
+
+When naming your variables try to use names that will make the content of the 
+variable obvious to someone reading your code. If you are going to store the 
+age of a person in a variable then `age` will be a much better name than `x`.
+</div>
+
+## Exercise - Purchase cost
 
 You are maintaining the code for computing the cost of purchases. 
 The current system is a bit of a mess and requires 
