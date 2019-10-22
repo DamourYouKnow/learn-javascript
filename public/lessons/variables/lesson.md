@@ -61,6 +61,22 @@ variable obvious to someone reading your code. If you are going to store the
 age of a person in a variable then `age` will be a much better name than `x`.
 </div>
 
+## Reassignment operators
+
+JavaScript includes a set of special assignment operators that perform 
+arithmetic operations on a variable and reassign the result into the variable.
+
+Here are some examples and their equivalent expressions.
+
+```js
+value++; // value = value + 1;
+value--; // value = value - 1;
+value += 10; // value = value + 10;
+value -= 10; // value = value - 10;
+value *= 10; // value = value * 10;
+value /= 10; // value = value / 10;
+```
+
 ## Exercise - Purchase cost
 
 You are maintaining the code for computing the cost of purchases. 
