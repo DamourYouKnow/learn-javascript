@@ -93,6 +93,17 @@ The following code functions the exact same as the previous example:
 
 <div class="editor" source="sum2.js"></div>
 
+## Function scope
+
+Any variable declared using `let` or `const` inside a function is only 
+accessible inside that function. These variables are known to be declared 
+in the **local scope** of the function.
+
+The following code results in an error as the variable `descoped` is outside 
+of the function `myFunction`'s local scope.
+
+<div class="editor" source="scope.js"></div>
+
 ## Exercise
 
 Create a function named `volume` that accepts three parameters representing the 
