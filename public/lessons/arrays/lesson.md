@@ -73,7 +73,8 @@ const removed = array.pop() // array is now ['a', 'b'], removed is 'c'
 ```
 
 <div class="note">
-    Calling `pop` on an empty array will return `undefined`.
+
+Calling `pop` on an empty array will return `undefined`.
 </div>
 
 ### unshift()
@@ -200,5 +201,11 @@ Consider the following examples:
 `'celery and lettuce'`.
 - An input of `['celery']` should return `'celery'`.
 - An input of `[]` should return the empty string `''`.
+
+<div class="tip">
+
+**Hint:** Combine your knowledge of conditional from the previous lesson with 
+the basics of arrays and the array `join()` function.
+</div>
 
 <div class="editor" test="list-test.js">
