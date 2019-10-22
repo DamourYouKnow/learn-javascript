@@ -9,20 +9,19 @@ addEventListener('message', (message) => {
     }
 
     try {
-        eval(code);
+        eval(code); // WARNING: Update block below if this line moves.
         postMessage({'success': true, 'output': __output});
     } catch (err) {
         let line = undefined;
         if (err.stack) {
-            const lineCols = err.stack.match(/(>:\d+:\d+)|(:\d+:\d+)/g);
-            if (lineCols) {
-                const chromeLineCol = lineCols.find((lc) => lc.startsWith('>'));
-                if (chromeLineCol) {
-                    line = chromeLineCol.split(':')[1];
-                } else {
-                    line = lineCols[0].split(':')[1];
-                }
-            }
+            const lineCols = err.stack.match(/:\d+:\d+/g).filter((lc) => {
+                /**
+                 * This line is used to detect if an error comes from the
+                 * eval() call.
+                 */
+                return lc != ':12:9';
+            });
+            if (lineCols.length > 0) line = lineCols[0].split(':')[1];
         }
 
         const content = line ? `Line ${line} - ${err.message}`: err.message
