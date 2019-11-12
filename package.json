@@ -28,7 +28,7 @@
     "@types/highlightjs": "^9.12.0",
     "@types/marked": "^0.6.5",
     "@types/node": "^12.7.5",
-    "@typescript-eslint/eslint-plugin": "^2.2.0",
+    "@typescript-eslint/eslint-plugin": "^2.7.0",
     "@typescript-eslint/parser": "^2.2.0",
     "ace-builds": "^1.4.6",
     "babel-plugin-transform-function-bind": "^6.22.0",
