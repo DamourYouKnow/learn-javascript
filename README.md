@@ -18,6 +18,11 @@ Install Learn JavaScript dependencies:
 npm install
 ```
 
+Create a development build:
+```
+npm run build
+```
+
 Start the local development server:
 ```
 npm run start
@@ -124,3 +129,8 @@ I am a note written in **Markdown!**
     I am a warning written in <strong>HTML</strong>
 </div>
 ```
+
+## Deployment
+A production build can be created by running `npm run build-prod`. The contents 
+of the `public/` directory can deployed to any server after the build is 
+completed.
