@@ -52,8 +52,9 @@ async function resolveLesson(): Promise<void> {
     }
 }
 
-// TODO: Duplicate interface declaration
 interface EditorConfig {
+    lesson: string;
+    position: number;
     content?: string;
     tests?: string;
 }
@@ -69,11 +70,15 @@ async function loadLesson(path: string): Promise<void> {
 
         const elems = Array.from(document.querySelectorAll('.editor'));
 
-        for (const elem of elems) {
+        for (let i = 0; i < elems.length; i++) {
+            const elem = elems[i];
             const source = elem.getAttribute('source');
             const tests = elem.getAttribute('test');
 
-            const config: EditorConfig = {};
+            const config: EditorConfig = {
+                lesson: path,
+                position: i
+            };
             if (source) config.content = await Request.getFile(path + source);
             if (tests) config.tests = await Request.getFile(path + tests);
             
@@ -81,7 +86,6 @@ async function loadLesson(path: string): Promise<void> {
         }
 
         // Replace notification blocks.
-        // TODO: A lot of duplicate code here.
         const notifications: {[key in NotificationType]: Renderer} = {
             'tip': (elem) => {
                 const container = document.createElement('div');
@@ -137,7 +141,6 @@ async function loadLesson(path: string): Promise<void> {
         }
 
         // Add previous next button.
-        // TODO: Refactor
         const btnRow = document.createElement('div');
         btnRow.classList.add('nav-btn-row');
         const colLeft = document.createElement('div');

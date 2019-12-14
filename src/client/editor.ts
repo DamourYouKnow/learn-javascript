@@ -4,6 +4,8 @@ import Utils from './utils';
 import UI from './ui';
 
 interface EditorConfig {
+    lesson: string;
+    position: number;
     content?: string;
     tests?: string;
 }
@@ -18,6 +20,8 @@ type Renderer = (line: HTMLElement) => HTMLElement;
 
 export default class Editor {
     private _editor: ace.Ace.Editor;
+    private _lesson: string;
+    private _position: number;
     private _elem: HTMLElement;
     private _default = '';
     private _tests?: string;
@@ -25,7 +29,10 @@ export default class Editor {
     private _runBtn: HTMLButtonElement;
     private _resetBtn: HTMLButtonElement;
 
-    public constructor(elem: HTMLElement, config?: EditorConfig) {
+    public constructor(elem: HTMLElement, config: EditorConfig) {
+        this._lesson = config.lesson;
+        this._position = config.position;
+
         this._elem = elem;
         this._running = false;
 
@@ -42,6 +49,12 @@ export default class Editor {
             this._editor.setValue(this._default, 1);
             this._tests = config.tests;
         }
+
+        // Attempt to retrieve last content from session storage.
+        const storage = sessionStorage.getItem(
+            `${this._lesson}:${this._position}`
+        );
+        if (storage) this._editor.setValue(storage, 1);
 
         // Run button
         this._runBtn = document.createElement('button');
@@ -85,6 +98,12 @@ export default class Editor {
                 const runEnabled = this.content != '' && !this.hasError();
                 UI.enabled(this._runBtn, runEnabled);
                 UI.enabled(this._resetBtn, this.content != this.default);
+
+                // Save to local storage
+                sessionStorage.setItem(
+                    `${this._lesson}:${this._position}`,
+                    this.content
+                );
             }, 300);
         });
         // @ts-ignore
